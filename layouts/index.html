@@ -1,0 +1,100 @@
+{{ define "main" }}
+{{ partial "banner.html" . }}
+
+<div class="container-fluid" >  
+    <div class="container features pb-lg-5 mb-lg-5">
+    <h2 class="text-center my-5">How Makhno can help</h2>
+            <div class="row justify-content-between align-items-start">
+                {{ $features := where .Site.RegularPages "Type" "features"}}
+                {{ range first 3 (where $features "Params.home" true) }}
+                <div class="col-xl-4 col-lg-4 col-md-6 col-12  d-flex  justify-content-center position-relative" >
+                    <div class="icon-wrapper">
+                        <span class="zoom-wrapper" >
+                            <img class="img-fluid" src="{{ .Site.BaseURL }}/img/home/feature/{{ .Params.image }}"  alt="{{ .Params.Name }}">
+                        </span>
+                    </div>
+                    <div class="content-wrapper">
+                        <a class="title mt-3 mb-0" aria-label="Project name: {{ .Params.Name }}">{{ .Params.Name }}</a>
+                        
+                            {{ $content := .Content }}
+                            {{ $content | safeHTML }}
+                       
+                    </div>
+                </div>
+                {{ end }}
+            </div>
+    </div>
+</div>
+
+<div class="container-fluid video-section" >  
+
+            <div class="container  py-lg-5 my-lg-5">
+          
+                        <div class="row  w-100 g-5">
+                            
+                            
+                                <div class="col-md-6 col-6">
+                                    <div class="video-wrapper background-teal-100 d-flex justify-content-center align-items-center">
+                                        <a href="https://www.youtube.com/watch?v=D7ovwGioN9E" class="popup-video">{{ partial "fontawesome.html" "duotone/play" }}</a>
+                                    </div>
+                                    
+                                </div>
+                                <div class="video-desc col-md-6 col-6 d-flex flex-column justify-content-center">
+                                    <div class="title-wrapper pb-1">
+                                        <h2>How Makhno works</h2>
+                                    </div> 
+                                    <div class="desc-wrapper pb-5">
+                                        <p>
+                                            Makhno connects from different vantage points around the world for each submitted link, so it records when content is taken down. it is a collaborative system, the more the merrier.
+                                        </p>
+                                    </div>
+                                    <div class="link">
+                                        <a href="#">Methodology {{ partial "fontawesome.html" "light/arrow-right" }}</a>
+                                    </div>
+                                </div>
+                          
+                           
+                        </div>
+                        
+            </div>
+
+            <div class="container integrations">
+                <h2 class="text-center pb-4">Integrations</h2>
+                <div class="row  w-100 g-5">
+                    {{ $integrations := where .Site.RegularPages "Type" "integrations"}}
+                    
+                    {{ range first 2 (where $integrations "Params.home" true) }}
+                    {{ $name := .Params.name | lower}}
+                    {{ $path := printf "%s" $name | printf "%s%s" "brands/" }}
+                        <div class="col-md-6 col-6 ">
+
+                                <div class="box-wrapper">
+                                    <div class="icon d-flex justify-content-center align-items-center mb-4">{{ partial "fontawesome.html" $path }}</div>
+                                    <div class="title mb-2">{{.Params.name}}</div>
+                                    <div class="desc">
+                                        {{ $content := .Content }}
+                                        {{ $content | safeHTML }}
+                                    </div>
+                                </div>      
+                
+                        </div>
+                    {{ end }} 
+                  
+                    
+                  
+                   
+                </div>
+                
+    </div>
+
+
+
+    </div>
+
+    <div class="container-fluid" >  
+
+            {{ partial "cta.html" . }}
+
+</div>
+
+{{ end }}
