@@ -249,6 +249,9 @@ ul.language-list {
 
 h1{
   font-size: 3.75rem;
+  @include media-breakpoint-down (sm) {
+    font-size: 3rem;
+  }
 }
 
 
@@ -278,7 +281,10 @@ h1{
 
     & .banner{
       & p.desc {
-        font-size: 24px;
+        font-size: 1.5rem;
+        @include media-breakpoint-down (sm){
+          font-size: 1.25rem;
+        }
       }
     }
     & .features {
@@ -315,11 +321,22 @@ h1{
       background: url(../../img/home/section-bg.svg);
       background-repeat: no-repeat;
 
+      @include media-breakpoint-down(sm) {
+        background: none;
+      }
+
       & .video-wrapper{
         height: 400px;
+        @include media-breakpoint-down (sm) {
+          max-height: 243px;
+        }
         & .inline-svg{
           width: 8rem;
           height: 8rem;
+          @include media-breakpoint-down (sm) {
+            width: 5rem;
+            height: 5rem;
+          }
           & svg {
             width: 100%;
             height: 100%;
@@ -359,6 +376,9 @@ h1{
           border-radius: 8px;
           max-width: 360px;
           padding: 1.5rem;
+          @include media-breakpoint-down (sm) {
+            max-width: 100%;
+          }
           & .icon {
             padding: 17px;
             width: 3.5rem;
@@ -458,6 +478,10 @@ h1{
     line-height: 1.5;
     color: $teal-800;
     text-decoration: none;
+    @include media-breakpoint-down (sm) {
+      width: 100%;
+      text-align: center;
+    }
 
   }
 }
@@ -466,19 +490,45 @@ h1{
 footer {
    //existing styles...
     & .logos{
+      @include media-breakpoint-down(sm){
+        padding-left: 0;
+      }
       & p{
         font-size: 1rem;
         font-weight: 400;
         line-height: 1.5;
         text-transform: uppercase;
         color: $teal-50;
+        @include media-breakpoint-down (md) {
+          flex-basis: 100%;
+          text-align: left;
+
+        }
+        // @include media-breakpoint-down (xl){
+        //   flex-basis: 33%;
+        // }
+      }
+      & img{
+        @include media-breakpoint-down (md){
+          flex-basis: 50%;
+          max-width: 160px;
+        }
+        // @include media-breakpoint-down (xl){
+        //   flex-basis: 33%;
+        // }
       }
     }
 
     & .socials{
+      @include media-breakpoint-down(sm){
+        padding-left: 0;
+      }
       & a{
         color: $teal-50;
         padding: 0 1rem;
+        @include media-breakpoint-down (sm) {
+          padding-left:0;
+        }
       }
     }
     & .copyright{
@@ -504,6 +554,15 @@ footer {
 
 .form-filter{
 
+  // .form-row > div{
+  //   flex: 1;
+  // }
+  input::placeholder{
+    color: $coolgray-500;
+    font-size: 1rem;
+
+
+  }
   & label{
     font-weight: 500;
     font-size: 14px;
@@ -528,6 +587,10 @@ footer {
     }
     & > div {
       padding-inline: 2rem;
+
+      @include media-breakpoint-down (sm) {
+        padding-inline: 1rem;
+      }
     }
 
    }
@@ -548,14 +611,14 @@ input[type="text"]
   border: 1px solid #D1D5DB;
   box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05);
   border-radius: 6px;
-  height: 38px;
+  padding-block: 0.625rem;
 }
 input[type="submit"] {
   background: #FDE68A;
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1), 0px 1px 2px rgba(0, 0, 0, 0.06);
   border-radius: 6px;
   border: none;
-  height: 38px;
+  padding-block:0.625rem;
   color: #78350F;
 }
 
