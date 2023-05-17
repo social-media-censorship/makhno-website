@@ -63,7 +63,7 @@ paginate = 6
   description = " Monitoring social media content reachability worldwide"
   keywords = "monitor, socials, reachability, apps, makhno"
   copyright= "2020 Workflow, Inc. All rights reserved."
-  images = ["img/default.jpg"]
+  images = ["img/default.png"]
 
 # Set disableReadOtherPosts to true in order to hide the links to other posts.
   disableReadOtherPosts = false
