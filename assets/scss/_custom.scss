@@ -95,15 +95,27 @@ nav {
 }
 .navbar {
   height: 92px;
+  .navbar-brand{
+    @include media-breakpoint-down (md){
+      
+      img{
+        width: 100%;
+        
+      }
+    }
+  }
 }
 
 .navbar-toggler {
   font-size: 1.5rem;
+  &:focus{
+    box-shadow: none;
+  }
+  path {
+    fill: $teal-600;
+  }
 }
 
-.navbar-toggler:focus {
-  box-shadow: none;
-}
 
 .overlay {
   height: 0;
@@ -112,7 +124,7 @@ nav {
   z-index: 1000;
   top: 0;
   left: 0;
-  background-color:$teal-400;
+  background-color:$coolgray-900;
   overflow-x: hidden;
   transition: 0.3s;
   overflow: auto;
@@ -330,6 +342,10 @@ h1{
         @include media-breakpoint-down (sm) {
           max-height: 243px;
         }
+        @include media-breakpoint-only(md) {
+          max-height: 250px;
+        }
+
         & .inline-svg{
           width: 8rem;
           height: 8rem;
@@ -376,20 +392,28 @@ h1{
           border-radius: 8px;
           max-width: 360px;
           padding: 1.5rem;
-          @include media-breakpoint-down (sm) {
+          @include media-breakpoint-down (md) {
             max-width: 100%;
           }
-          & .icon {
+          & .icon-left {
             padding: 17px;
             width: 3.5rem;
             height: 3.5rem;
-            background-color: $teal-50;
             border-radius: 8px;
             & .inline-svg{
               width: 1.62rem;
               height: 1.62rem;
                 & path{
                   fill: $teal-600;
+                }  
+            }
+          }
+          & .icon-right {
+            & .inline-svg{
+              width: 1.25rem;
+              height: 1.25rem;
+                & path{
+                  fill: $coolgray-300;
                 }  
             }
           }
@@ -426,21 +450,36 @@ h1{
   background-color: $teal-600;
   color: #333;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   padding: 11px;
 }
 #top-bar p {
   margin: 0 auto 0 0;
-  text-align: center;
   flex: 1;
   color: #fff;
   font-weight: 500;
+  &::selection{
+    color:$teal-600;
+  }
 }
 #top-bar a {
   color: #fff;
   font-weight: 700;
   padding-left: 1.5rem;
   text-decoration: underline;
+  svg{
+    width: 1rem;
+  }
+  &::selection{
+    color:$teal-600;
+  }
+  @include media-breakpoint-down (sm){
+    display: block;
+    padding-left: 0;
+    svg{
+      width: 1rem;
+    }
+  }
 }
 
 #close-btn {
@@ -604,7 +643,7 @@ footer {
 
 
 
-select#country,
+
 input[type="text"]
  {
   background: #FFFFFF;
@@ -613,6 +652,19 @@ input[type="text"]
   border-radius: 6px;
   padding-block: 0.625rem;
 }
+select#country{
+  background: linear-gradient(to right,white 20%, white 20%, white 95%,#ffffff00 0) ,url(data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0Ljk1IDEwIj48ZGVmcz48c3R5bGU+LmNscy0xe2ZpbGw6I2ZmZjt9LmNscy0ye2ZpbGw6IzQ0NDt9PC9zdHlsZT48L2RlZnM+PHRpdGxlPmFycm93czwvdGl0bGU+PHJlY3QgY2xhc3M9ImNscy0xIiB3aWR0aD0iNC45NSIgaGVpZ2h0PSIxMCIvPjxwb2x5Z29uIGNsYXNzPSJjbHMtMiIgcG9pbnRzPSIxLjQxIDQuNjcgMi40OCAzLjE4IDMuNTQgNC42NyAxLjQxIDQuNjciLz48cG9seWdvbiBjbGFzcz0iY2xzLTIiIHBvaW50cz0iMy41NCA1LjMzIDIuNDggNi44MiAxLjQxIDUuMzMgMy41NCA1LjMzIi8+PC9zdmc+);
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  background-repeat: no-repeat;
+  background-position: 100% 100%;
+  border: 1px solid #D1D5DB;
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05);
+  border-radius: 6px;
+  padding-block: 0.625rem;
+}
+
 input[type="submit"] {
   background: #FDE68A;
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1), 0px 1px 2px rgba(0, 0, 0, 0.06);

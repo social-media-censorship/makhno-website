@@ -8,7 +8,7 @@
         <img src="/img/makhno_logo.svg" alt="makhno logo">
       </a>
       <button class="navbar-toggler" type="button" aria-label="Toggle navigation" onclick="openNav()">
-        <i class="fa-solid fa-grip-lines"></i>
+        {{ partial "fontawesome.html" "light/bars" }}
       </button>
       <div class="collapse navbar-collapse flex-grow-0">
         <ul class="navbar-nav">
@@ -36,18 +36,17 @@
     </nav>
     <div id="navbar-mobile" class="navbar-mobile overlay d-block d-lg-none" {{ if .Params.background
       }}style="background-color: {{ .Params.background }};" {{ else }}{{ end }}>
-      <div class="container-fluid">
-        <div class="container py-3">
+      <div class="container-md-fluid">
+        <div class="container-lg px-4">
           <div class="navbar align-items-center justify-content-between">
-            <a class="brand" href="{{ .Site.BaseURL }}">
-              <img src="/img/svg/logo-white.svg" alt="Makhno logo" width="209">
+            <a class="navbar-brand" href="{{ .Site.BaseURL }}">
+              <img src="/img/svg/logo_white.svg" alt="Makhno logo" width="209">
             </a>
-            <button type="button" class="closebtn" aria-label="Toggle navigation" onclick="closeNav()"><i
-                class='fa-solid fa-xmark {{ if eq $theme "dark" }}text-white{{ else if eq $theme "light" }}text-dark{{ else }}{{ end }}'></i></button>
+            <button type="button" class="closebtn" aria-label="Toggle navigation" onclick="closeNav()">{{ partial "fontawesome.html" "light/xmark" }}</button>
           </div>
         </div>
         <div class="overlay-content">
-          <div class="container pt-4">
+          <div class="container-lg pt-4 px-4">
             {{- $firstUrlElement := print "/" (index (split .RelPermalink "/") 1) "/" -}}
             <ul class="menu__list">
 
