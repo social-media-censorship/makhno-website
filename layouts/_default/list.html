@@ -6,7 +6,8 @@
                 <h1>{{ .Title }}</h1>
                 <article>
                     <div class="post-content pt-4">
-                        {{ .Content }}
+                        {{ range .Pages }}
+                        {{ end }}
                     </div>
                 </article>
             </div>

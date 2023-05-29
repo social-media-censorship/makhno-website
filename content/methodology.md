@@ -1,10 +1,7 @@
 +++
-title = "About Us"
+title = "Methodology"
 subtitle = "Ipsum deserunt Lorem dolore non eiusmod commodo nisi pariatur."
 description = ""
-image= "team.webp"
-
-
 +++
 
 Duis nisi sit eu laboris ullamco id ea culpa enim.

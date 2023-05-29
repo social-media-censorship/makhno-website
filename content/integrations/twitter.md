@@ -1,7 +1,7 @@
 +++
 name = "Twitter"
 link = "#"
-weight = 1
+weight = 2
 home = true
 +++
 

@@ -2,9 +2,10 @@ body {
   font-family: "Barlow";
   overflow-y: scroll;
   -webkit-font-smoothing: antialiased;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
-
-
 
 // Fix container width
 @media (min-width: 1400px) {
@@ -19,24 +20,23 @@ body {
     max-width: 1294px;
   }
   .container-lg > .row:first-child {
-    padding: 77px 77px 0px!important;
+    padding: 77px 77px 0px !important;
   }
   .container-lg > .row:last-child {
-    padding: 25px 77px 25px 77px!important;
+    padding: 25px 77px 25px 77px !important;
   }
 }
 // Add extra bootstrap attributes
-@include media-breakpoint-up(lg) { 
+@include media-breakpoint-up(lg) {
   .ms-6 {
     margin-left: 4rem !important;
   }
- }
+}
 
 .py-4-5 {
   padding-top: 2rem !important;
   padding-bottom: 2rem !important;
 }
-
 
 // Menu
 
@@ -95,12 +95,10 @@ nav {
 }
 .navbar {
   height: 92px;
-  .navbar-brand{
-    @include media-breakpoint-down (md){
-      
-      img{
+  .navbar-brand {
+    @include media-breakpoint-down(md) {
+      img {
         width: 100%;
-        
       }
     }
   }
@@ -108,14 +106,13 @@ nav {
 
 .navbar-toggler {
   font-size: 1.5rem;
-  &:focus{
+  &:focus {
     box-shadow: none;
   }
   path {
     fill: $teal-600;
   }
 }
-
 
 .overlay {
   height: 0;
@@ -124,7 +121,7 @@ nav {
   z-index: 1000;
   top: 0;
   left: 0;
-  background-color:$coolgray-900;
+  background-color: $coolgray-900;
   overflow-x: hidden;
   transition: 0.3s;
   overflow: auto;
@@ -134,12 +131,12 @@ nav {
 .overlay a:not(.brand) {
   text-decoration: none;
   font-size: 2rem;
-  color: $white!important;
+  color: $white !important;
   display: block;
   transition: 0.3s;
   font-weight: 500;
 }
-.overlay button.dropdown__title  {
+.overlay button.dropdown__title {
   text-decoration: none;
   font-size: 2rem;
   color: $white;
@@ -175,15 +172,15 @@ nav {
   transform: translateX(15px);
 }
 
-.navbar-mobile{
-  & ul{
+.navbar-mobile {
+  & ul {
     list-style: none;
-    padding-left: 0!important;
+    padding-left: 0 !important;
   }
 }
 
 button.dropdown__title {
-  display: block; 
+  display: block;
   padding: 15px 14px;
   color: $teal-600;
   text-decoration: none;
@@ -194,8 +191,7 @@ button.dropdown__title {
   background: transparent;
   border: none;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
-  border-color 0.15s ease-in-out;
-  
+    border-color 0.15s ease-in-out;
 }
 ul.language-list {
   position: absolute;
@@ -210,11 +206,10 @@ ul.language-list {
   &:hover,
   &:focus-within {
     ul.language-list {
-     display: block;
+      display: block;
     }
   }
 }
-
 
 // Accessibility
 .screen-reader-text {
@@ -249,7 +244,6 @@ ul.language-list {
 
 /// change nav bar structure
 
-
 .navbar-nav {
   display: block;
 
@@ -259,19 +253,15 @@ ul.language-list {
 }
 // Headings
 
-h1{
+h1 {
   font-size: 3.75rem;
-  @include media-breakpoint-down (sm) {
+  @include media-breakpoint-down(sm) {
     font-size: 3rem;
   }
 }
 
-
-
-
 // Homepage styles
-.homepage{
-
+.homepage {
   & h2 {
     font-size: 2.25rem;
     font-weight: 700;
@@ -280,97 +270,94 @@ h1{
   }
 
   & h1#styled-title {
-      color: $teal-700;
-      font-weight: 700;
-      line-height: 100%;
-      letter-spacing: -0.04em;
-      & span#first-word,
-      span#last-word {
-        color:$coolgray-900;
-      }
+    color: $teal-700;
+    font-weight: 700;
+    line-height: 100%;
+    letter-spacing: -0.04em;
+    & span#first-word,
+    span#last-word {
+      color: $coolgray-900;
     }
+  }
 
-
-    & .banner{
-      & p.desc {
-        font-size: 1.5rem;
-        @include media-breakpoint-down (sm){
-          font-size: 1.25rem;
-        }
-      }
-    }
-    & .features {
-      //existing styles...
-      & .icon-wrapper {
-        flex-basis: 18.6%;
-        padding-right: 0.4%;
-        & img {
-          background: #99F6E4;
-          padding: 15px;
-          border-radius: 6px;
-          width: 48px;
-        }
-      }
-      & .content-wrapper {
-        flex-basis: 81%;
-        & .title{
-          color: $coolgray-900;
-          font-size: 1.25rem ;
-          line-height: 1.5rem ;
-          font-weight: 500;
-          text-decoration: none;
-        }
-        & p{
-          font-size: 1rem;
-          line-height: 1.5rem;
-          color: $coolgray-500;
-          font-weight: 400;
-          padding-top: 1rem;
-        }
-       }
-    }
-    & .video-section{
-      background: url(../../img/home/section-bg.svg);
-      background-repeat: no-repeat;
-
+  & .banner {
+    & p.desc {
+      font-size: 1.5rem;
       @include media-breakpoint-down(sm) {
-        background: none;
+        font-size: 1.25rem;
+      }
+    }
+  }
+  & .features {
+    //existing styles...
+    & .icon-wrapper {
+      flex-basis: 18.6%;
+      padding-right: 0.4%;
+      & img {
+        background: #99f6e4;
+        padding: 15px;
+        border-radius: 6px;
+        width: 48px;
+      }
+    }
+    & .content-wrapper {
+      flex-basis: 81%;
+      & .title {
+        color: $coolgray-900;
+        font-size: 1.25rem;
+        line-height: 1.5rem;
+        font-weight: 500;
+        text-decoration: none;
+      }
+      & p {
+        font-size: 1rem;
+        line-height: 1.5rem;
+        color: $coolgray-500;
+        font-weight: 400;
+        padding-top: 1rem;
+      }
+    }
+  }
+  & .video-section {
+    background: url(../../img/home/section-bg.svg);
+    background-repeat: no-repeat;
+
+    @include media-breakpoint-down(sm) {
+      background: none;
+    }
+
+    & .video-wrapper {
+      height: 400px;
+      @include media-breakpoint-down(sm) {
+        max-height: 243px;
+      }
+      @include media-breakpoint-only(md) {
+        max-height: 250px;
       }
 
-      & .video-wrapper{
-        height: 400px;
-        @include media-breakpoint-down (sm) {
-          max-height: 243px;
+      & .inline-svg {
+        width: 8rem;
+        height: 8rem;
+        @include media-breakpoint-down(sm) {
+          width: 5rem;
+          height: 5rem;
         }
-        @include media-breakpoint-only(md) {
-          max-height: 250px;
-        }
+        & svg {
+          width: 100%;
+          height: 100%;
 
-        & .inline-svg{
-          width: 8rem;
-          height: 8rem;
-          @include media-breakpoint-down (sm) {
-            width: 5rem;
-            height: 5rem;
+          & path {
+            fill: $teal-400;
           }
-          & svg {
-            width: 100%;
-            height: 100%;
-  
-            & path{
-              fill: $teal-400;
-            }
-          }
-         
         }
       }
-    & .video-desc{
+    }
+    & .video-desc {
       & p {
         font-size: 1.125rem;
         font-weight: 400;
         line-height: 1.56;
         color: $coolgray-500;
-  
       }
       & a {
         font-size: 1rem;
@@ -378,21 +365,21 @@ h1{
         line-height: 1.5;
         color: $teal-600;
         text-decoration: none;
-        & .inline-svg{
-          width: .8rem;
-          height: .8rem;
+        & .inline-svg {
+          width: 0.8rem;
+          height: 0.8rem;
         }
       }
     }
-    & .integrations{
-      & > div{
- 
-        & .box-wrapper{
-          box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1), 0px 1px 2px rgba(0, 0, 0, 0.06);
+    & .integrations {
+      & > div {
+        & .box-wrapper {
+          box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1),
+            0px 1px 2px rgba(0, 0, 0, 0.06);
           border-radius: 8px;
           max-width: 360px;
           padding: 1.5rem;
-          @include media-breakpoint-down (md) {
+          @include media-breakpoint-down(md) {
             max-width: 100%;
           }
           & .icon-left {
@@ -400,50 +387,45 @@ h1{
             width: 3.5rem;
             height: 3.5rem;
             border-radius: 8px;
-            & .inline-svg{
+            & .inline-svg {
               width: 1.62rem;
               height: 1.62rem;
-                & path{
-                  fill: $teal-600;
-                }  
+              & path {
+                fill: $teal-600;
+              }
             }
           }
           & .icon-right {
-            & .inline-svg{
+            & .inline-svg {
               width: 1.25rem;
               height: 1.25rem;
-                & path{
-                  fill: $coolgray-300;
-                }  
+              & path {
+                fill: $coolgray-300;
+              }
             }
           }
-          & .title{
+          & .title {
             font-size: 1.5rem;
             line-height: 1.17;
             font-weight: 500;
             color: $coolgray-900;
           }
-          & .desc{
+          & .desc {
             font-size: 0.875rem;
-            line-height: 1.43 ;
+            line-height: 1.43;
             font-weight: 400;
             color: $coolgray-500;
-
           }
         }
-        & :first-child{    
-          & .box-wrapper{
+        & :first-child {
+          & .box-wrapper {
             float: right;
           }
         }
- 
-        
-     
       }
     }
   }
-
-  }
+}
 // Top Bar
 
 #top-bar {
@@ -458,8 +440,8 @@ h1{
   flex: 1;
   color: #fff;
   font-weight: 500;
-  &::selection{
-    color:$teal-600;
+  &::selection {
+    color: $teal-600;
   }
 }
 #top-bar a {
@@ -467,16 +449,16 @@ h1{
   font-weight: 700;
   padding-left: 1.5rem;
   text-decoration: underline;
-  svg{
+  svg {
     width: 1rem;
   }
-  &::selection{
-    color:$teal-600;
+  &::selection {
+    color: $teal-600;
   }
-  @include media-breakpoint-down (sm){
+  @include media-breakpoint-down(sm) {
     display: block;
     padding-left: 0;
-    svg{
+    svg {
       width: 1rem;
     }
   }
@@ -494,14 +476,14 @@ h1{
 // Call-to-Action
 
 .calltoaction {
-  & h2{
-    font-size: 2.25rem ;
+  & h2 {
+    font-size: 2.25rem;
     font-weight: 700;
     line-height: 1.11;
     color: $coolgray-900;
   }
-  & p{
-    font-size: 1.125rem ;
+  & p {
+    font-size: 1.125rem;
     font-weight: 400;
     line-height: 1.5;
     color: $coolgray-700;
@@ -517,95 +499,81 @@ h1{
     line-height: 1.5;
     color: $teal-800;
     text-decoration: none;
-    @include media-breakpoint-down (sm) {
+    @include media-breakpoint-down(sm) {
       width: 100%;
       text-align: center;
     }
-
   }
 }
 //Footer
 
 footer {
-   //existing styles...
-    & .logos{
-      @include media-breakpoint-down(sm){
-        padding-left: 0;
-      }
-      & p{
-        font-size: 1rem;
-        font-weight: 400;
-        line-height: 1.5;
-        text-transform: uppercase;
-        color: $teal-50;
-        @include media-breakpoint-down (md) {
-          flex-basis: 100%;
-          text-align: left;
-
-        }
-        // @include media-breakpoint-down (xl){
-        //   flex-basis: 33%;
-        // }
-      }
-      & img{
-        @include media-breakpoint-down (md){
-          flex-basis: 50%;
-          max-width: 160px;
-        }
-        // @include media-breakpoint-down (xl){
-        //   flex-basis: 33%;
-        // }
-      }
+  //existing styles...
+  & .logos {
+    @include media-breakpoint-down(sm) {
+      padding-left: 0;
     }
-
-    & .socials{
-      @include media-breakpoint-down(sm){
-        padding-left: 0;
+    & p {
+      font-size: 1rem;
+      font-weight: 400;
+      line-height: 1.5;
+      text-transform: uppercase;
+      color: $teal-50;
+      @include media-breakpoint-down(md) {
+        flex-basis: 100%;
+        text-align: left;
       }
-      & a{
-        color: $teal-50;
-        padding: 0 1rem;
-        @include media-breakpoint-down (sm) {
-          padding-left:0;
-        }
-      }
+      // @include media-breakpoint-down (xl){
+      //   flex-basis: 33%;
+      // }
     }
-    & .copyright{
-      & p{
-        font-size: 1rem;
-        font-weight: 400;
-        line-height: 1.5;
-        color: $teal-50;
+    & img {
+      @include media-breakpoint-down(md) {
+        flex-basis: 50%;
+        max-width: 160px;
       }
+      // @include media-breakpoint-down (xl){
+      //   flex-basis: 33%;
+      // }
     }
   }
 
-
-
-
-
-
-
-
-
+  & .socials {
+    @include media-breakpoint-down(sm) {
+      padding-left: 0;
+    }
+    & a {
+      color: $teal-50;
+      padding: 0 1rem;
+      @include media-breakpoint-down(sm) {
+        padding-left: 0;
+      }
+    }
+  }
+  & .copyright {
+    & p {
+      font-size: 1rem;
+      font-weight: 400;
+      line-height: 1.5;
+      color: $teal-50;
+    }
+  }
+}
 
 // filter-form styles
 
-.form-filter{
-
+.form-filter {
   // .form-row > div{
   //   flex: 1;
   // }
-  input::placeholder{
+  input::placeholder {
     color: $coolgray-500;
     font-size: 1rem;
-
-
   }
-  & label{
+  & label {
     font-weight: 500;
     font-size: 14px;
-    line-height: 20px; 
+    line-height: 20px;
     color: $coolgray-700;
     & p {
       color: $coolgray-500;
@@ -613,78 +581,74 @@ footer {
   }
 
   & details {
-   //...
-   & > div {
-    background: #FFFFFF;
-    mix-blend-mode: normal; 
-    border: 1px solid $teal-600;
-    border-radius: 6px;
-    padding-block: 1.125rem;
-
-    & .form-group-checkbox{
-      gap: .75rem;
-    }
+    //...
     & > div {
-      padding-inline: 2rem;
+      background: #ffffff;
+      mix-blend-mode: normal;
+      border: 1px solid $teal-600;
+      border-radius: 6px;
+      padding-block: 1.125rem;
 
-      @include media-breakpoint-down (sm) {
-        padding-inline: 1rem;
+      & .form-group-checkbox {
+        gap: 0.75rem;
+      }
+      & > div {
+        padding-inline: 2rem;
+
+        @include media-breakpoint-down(sm) {
+          padding-inline: 1rem;
+        }
       }
     }
-
-   }
-   & summary {
-    color: $teal-700;
+    & summary {
+      color: $teal-700;
+    }
   }
- }
-
 }
 
-
-
-
-
-input[type="text"]
- {
-  background: #FFFFFF;
-  border: 1px solid #D1D5DB;
+input[type="text"] {
+  background: #ffffff;
+  border: 1px solid #d1d5db;
   box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05);
   border-radius: 6px;
   padding-block: 0.625rem;
 }
-select#country{
-  background: linear-gradient(to right,white 20%, white 20%, white 95%,#ffffff00 0) ,url(data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0Ljk1IDEwIj48ZGVmcz48c3R5bGU+LmNscy0xe2ZpbGw6I2ZmZjt9LmNscy0ye2ZpbGw6IzQ0NDt9PC9zdHlsZT48L2RlZnM+PHRpdGxlPmFycm93czwvdGl0bGU+PHJlY3QgY2xhc3M9ImNscy0xIiB3aWR0aD0iNC45NSIgaGVpZ2h0PSIxMCIvPjxwb2x5Z29uIGNsYXNzPSJjbHMtMiIgcG9pbnRzPSIxLjQxIDQuNjcgMi40OCAzLjE4IDMuNTQgNC42NyAxLjQxIDQuNjciLz48cG9seWdvbiBjbGFzcz0iY2xzLTIiIHBvaW50cz0iMy41NCA1LjMzIDIuNDggNi44MiAxLjQxIDUuMzMgMy41NCA1LjMzIi8+PC9zdmc+);
+select#country {
+  background: linear-gradient(
+      to right,
+      white 20%,
+      white 20%,
+      white 95%,
+      #ffffff00 0
+    ),
+    url(data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0Ljk1IDEwIj48ZGVmcz48c3R5bGU+LmNscy0xe2ZpbGw6I2ZmZjt9LmNscy0ye2ZpbGw6IzQ0NDt9PC9zdHlsZT48L2RlZnM+PHRpdGxlPmFycm93czwvdGl0bGU+PHJlY3QgY2xhc3M9ImNscy0xIiB3aWR0aD0iNC45NSIgaGVpZ2h0PSIxMCIvPjxwb2x5Z29uIGNsYXNzPSJjbHMtMiIgcG9pbnRzPSIxLjQxIDQuNjcgMi40OCAzLjE4IDMuNTQgNC42NyAxLjQxIDQuNjciLz48cG9seWdvbiBjbGFzcz0iY2xzLTIiIHBvaW50cz0iMy41NCA1LjMzIDIuNDggNi44MiAxLjQxIDUuMzMgMy41NCA1LjMzIi8+PC9zdmc+);
   -moz-appearance: none;
   -webkit-appearance: none;
   appearance: none;
   background-repeat: no-repeat;
   background-position: 100% 100%;
-  border: 1px solid #D1D5DB;
+  border: 1px solid #d1d5db;
   box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05);
   border-radius: 6px;
   padding-block: 0.625rem;
 }
 
 input[type="submit"] {
-  background: #FDE68A;
+  background: #fde68a;
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1), 0px 1px 2px rgba(0, 0, 0, 0.06);
   border-radius: 6px;
   border: none;
-  padding-block:0.625rem;
-  color: #78350F;
+  padding-block: 0.625rem;
+  color: #78350f;
 }
 
 a#advanced-options-toggle {
-
   font-weight: 500;
   font-size: 16px;
   line-height: 24px;
-  color: #0F766E;
+  color: #0f766e;
   text-decoration: none;
 }
-
-
-
 
 .inline-svg {
   display: inline-block;
@@ -693,7 +657,6 @@ a#advanced-options-toggle {
   position: relative;
 }
 
-
-#top-bar .inline-svg{
+#top-bar .inline-svg {
   display: flex;
 }

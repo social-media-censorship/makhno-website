@@ -1,5 +1,5 @@
 <!-- Footer -->
-<footer class="text-center text-md-start ">
+<footer class="text-center text-md-start mt-auto">
   
     <!-- Section: Logos  -->
     <section>
@@ -16,29 +16,17 @@
                 <img class="pe-xl-5 pe-3" src="/img/footer-logo2.svg" alt="footer logo">
                 <img src="/img/footer-logo1.svg" alt="footer logo">     
               </div>
-             
-             
             </div>
-
-           
-           
-            
           </div>
           <!-- Grid column -->
-  
-         
-  
       <!-- Section: Socials  -->
   
-    
-          <div class="col-sm-3 col-12  mb-md-0 mb-sm-4 d-flex justify-content-sm-end justify-content-start socials">
-            <!-- Links -->
-            {{- with .Site.Params.social }}
-            {{ partial "social-icons.html" . }}
-            {{- end }}
-          </div>
-         
-           
+        <div class="col-sm-3 col-12  mb-md-0 mb-sm-4 d-flex justify-content-sm-end justify-content-start socials">
+          <!-- Links -->
+          {{- with .Site.Params.social }}
+          {{ partial "social-icons.html" . }}
+          {{- end }}
+        </div>
           
           <!-- Grid column -->
         </div>
@@ -58,7 +46,6 @@
  
     <!-- Section: Links  -->
   
-    
   </footer>
   <!-- Footer -->
 

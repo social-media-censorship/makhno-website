@@ -1,7 +1,7 @@
 +++
 name = "Telegram"
 link = "#"
-weight = 3
+weight = 1
 home = true
 +++
 
