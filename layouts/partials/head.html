@@ -10,11 +10,6 @@
 <meta name="robots" content="noodp" />
 <link rel="canonical" href="{{ .Permalink }}" />
 
-<!-- JS -->
-<script src="{{ .Site.BaseURL }}/js/jquery-3.6.4.js"></script>
-<script src="{{ .Site.BaseURL }}/js/scripts.js"></script>
-<script src="{{ .Site.BaseURL }}/js/jquery.magnific-popup.js"></script>
-
 {{ block "title" . }}
 <title>
   {{ if .IsHome }} {{ $.Site.Title }} {{ with $.Site.Params.Subtitle }} — {{ . }} {{ end }} {{ else }} {{ .Title }} ::

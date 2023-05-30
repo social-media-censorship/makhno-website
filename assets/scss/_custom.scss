@@ -179,38 +179,6 @@ nav {
   }
 }
 
-button.dropdown__title {
-  display: block;
-  padding: 15px 14px;
-  color: $teal-600;
-  text-decoration: none;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 18px;
-  text-decoration: none;
-  background: transparent;
-  border: none;
-  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
-    border-color 0.15s ease-in-out;
-}
-ul.language-list {
-  position: absolute;
-  padding-left: 0;
-  max-width: 15rem;
-  display: none;
-  transition: 280ms all ease-out;
-}
-.dropdown {
-  // ... existing styles
-
-  &:hover,
-  &:focus-within {
-    ul.language-list {
-      display: block;
-    }
-  }
-}
-
 // Accessibility
 .screen-reader-text {
   border: 0;
@@ -659,4 +627,41 @@ a#advanced-options-toggle {
 
 #top-bar .inline-svg {
   display: flex;
+}
+
+button#openModalDialog {
+  border: none;
+  background: transparent;
+}
+
+dialog::backdrop {
+  backdrop-filter: blur(3px);
+  background-color: #00000090;
+}
+
+dialog {
+  border: none;
+  background: transparent;
+  padding: 0;
+  width: 50%;
+
+  @include media-breakpoint-down(lg) {
+    width: 100%;
+  }
+
+  & .container {
+    position: relative;
+    overflow: hidden;
+    padding-top: 56.25%;
+  }
+}
+
+.responsive-iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
 }

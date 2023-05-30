@@ -1,52 +1,31 @@
-<!-- Footer -->
 <footer class="text-center text-md-start mt-auto">
-  
-    <!-- Section: Logos  -->
-    <section>
-
-      <div class="text-center text-md-start background-teal-900 px-sm-3 px-3">
-        <!-- Grid row -->
-        <div class="row w-100 py-sm-5 pt-5 px-xl-5 mx-0">
-          <!-- Grid column -->
-          <div class="col-sm-9  col-12  mb-sm-4 mb-5 logos">
-            <!-- Content -->
-            <div class="row">
-              <div class="col-12 d-flex flex-wrap align-items-center justify-content-start">
-                <p class="mb-md-0 pe-xl-5 pe-3 ">A project by</p>
-                <img class="pe-xl-5 pe-3" src="/img/footer-logo2.svg" alt="footer logo">
-                <img src="/img/footer-logo1.svg" alt="footer logo">     
-              </div>
+  <section>
+    <div class="text-center text-md-start background-teal-900 px-sm-3 px-3">
+      <div class="row w-100 py-sm-5 pt-5 px-xl-5 mx-0">
+        <div class="col-sm-9 col-12 mb-sm-4 mb-5 logos">
+          <div class="row">
+            <div class="col-12 d-flex flex-wrap align-items-center justify-content-start">
+              <p class="mb-md-0 pe-xl-5 pe-3 ">A project by</p>
+              <img class="pe-xl-5 pe-3" src="/img/footer-logo2.svg" alt="footer logo">
+              <img src="/img/footer-logo1.svg" alt="footer logo">
             </div>
           </div>
-          <!-- Grid column -->
-      <!-- Section: Socials  -->
-  
-        <div class="col-sm-3 col-12  mb-md-0 mb-sm-4 d-flex justify-content-sm-end justify-content-start socials">
-          <!-- Links -->
+        </div>
+        <div class="col-sm-3 col-12 mb-md-0 mb-sm-4 d-flex justify-content-sm-end justify-content-start socials">
           {{- with .Site.Params.social }}
           {{ partial "social-icons.html" . }}
           {{- end }}
         </div>
-          
-          <!-- Grid column -->
-        </div>
-         <!-- Copyright -->
-        <div class="row w-100 px-xl-5 py-3 copyright">
-          <div class="col-12">
-            <p class="mb-0 text-start">
-              <!-- Links -->
-              © {{ .Site.Params.Description }}
-            </p>
-          </div>
-        </div>
-         <!-- Copyright -->
-        <!-- Grid row -->
       </div>
-    </section>
- 
-    <!-- Section: Links  -->
-  
-  </footer>
-  <!-- Footer -->
+      <div class="row w-100 px-xl-5 py-3 copyright">
+        <div class="col-12">
+          <p class="mb-0 text-start">
+            © {{ .Site.Params.Description }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</footer>
 
 {{ partial "javascript.html" . }}

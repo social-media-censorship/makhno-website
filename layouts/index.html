@@ -15,8 +15,8 @@
                 </div>
                 <div class="content-wrapper">
                     <a class="title mt-3 mb-0" aria-label="Project name: {{ .Params.Name }}">{{ .Params.Name }}</a>
-                        {{ $content := .Content }}
-                        {{ $content | safeHTML }}
+                    {{ $content := .Content }}
+                    {{ $content | safeHTML }}
                 </div>
             </div>
             {{ end }}
@@ -29,7 +29,36 @@
         <div class="row w-100 g-md-5 g-0">
                 <div class="col-md-6 col-12">
                     <div class="video-wrapper background-teal-100 d-flex justify-content-center align-items-center">
-                        <a href="https://www.youtube.com/watch?v=D7ovwGioN9E" class="popup-video">{{ partial "fontawesome.html" "duotone/play" }}</a>
+
+                        <dialog id="ModalVideo">
+                            <div class="container">
+                                <iframe class="responsive-iframe" src="https://www.youtube-nocookie.com/embed/jNQXAC9IVRw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                            </div>
+                        </dialog>
+                          
+                        <button id="openModalDialog">{{ partial "fontawesome.html" "duotone/play" }}</button>
+                          
+                        <script>
+                            var ModalVideo = document.getElementById('ModalVideo');
+
+                            openModalDialog.addEventListener('click', function onOpen() {
+                                if (typeof ModalVideo.showModal === "function") {
+                                    ModalVideo.showModal();
+                                } 
+                                else {
+                                    alert("The <dialog> API is not supported by this browser");
+                                }
+                            });
+
+                            ModalVideo.addEventListener("click", event => {
+                                const rect = ModalVideo.getBoundingClientRect();
+                                    if (event.clientY < rect.top || event.clientY > rect.bottom ||
+                                        event.clientX < rect.left || event.clientX > rect.right) {
+                                        ModalVideo.close();
+                                    }
+                            });
+                        </script>
+
                     </div>
                 </div>
                 <div class="video-desc col-md-6 col-12 d-flex flex-column justify-content-center mt-md-inherit mt-md-5 mt-3">
