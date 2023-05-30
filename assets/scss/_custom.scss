@@ -19,13 +19,8 @@ body {
   .container-lg {
     max-width: 1294px;
   }
-  .container-lg > .row:first-child {
-    padding: 77px 77px 0px !important;
-  }
-  .container-lg > .row:last-child {
-    padding: 25px 77px 25px 77px !important;
-  }
 }
+
 // Add extra bootstrap attributes
 @include media-breakpoint-up(lg) {
   .ms-6 {
@@ -33,15 +28,9 @@ body {
   }
 }
 
-.py-4-5 {
-  padding-top: 2rem !important;
-  padding-bottom: 2rem !important;
-}
-
 // Menu
-
 .navbar-nav {
-  & .nav-link-lang {
+  & .nav-link {
     // existing styles....
     &:after {
       content: "";
@@ -77,8 +66,8 @@ body {
       text-decoration: none;
       font-weight: 500;
       font-size: 1.125rem;
-      line-height: 24px;
-      padding: 15px 14px;
+      line-height: 1.5rem;
+      padding: 1rem 0.95rem;
 
       &:hover {
         color: $teal-900;
@@ -89,12 +78,14 @@ body {
     }
   }
 }
+
 // Navbar
 nav {
   z-index: 2;
 }
+
 .navbar {
-  height: 92px;
+  height: 5.75rem;
   .navbar-brand {
     @include media-breakpoint-down(md) {
       img {
@@ -136,6 +127,7 @@ nav {
   transition: 0.3s;
   font-weight: 500;
 }
+
 .overlay button.dropdown__title {
   text-decoration: none;
   font-size: 2rem;
@@ -164,12 +156,12 @@ nav {
   opacity: 0;
   transition: transform 0.3s ease-in-out;
   position: absolute;
-  left: 40px;
+  left: 2.5rem;
 }
 
 .navbar-brand:hover .wordmark {
   opacity: 1;
-  transform: translateX(15px);
+  transform: translateX(1rem);
 }
 
 .navbar-mobile {
@@ -210,8 +202,7 @@ nav {
   z-index: 100000;
 }
 
-/// change nav bar structure
-
+// Change nav bar structure
 .navbar-nav {
   display: block;
 
@@ -219,6 +210,7 @@ nav {
     display: inline-block;
   }
 }
+
 // Headings
 
 h1 {
@@ -233,7 +225,7 @@ h1 {
   & h2 {
     font-size: 2.25rem;
     font-weight: 700;
-    line-height: 60px;
+    line-height: 3.75rem;
     letter-spacing: -0.025em;
   }
 
@@ -256,15 +248,14 @@ h1 {
     }
   }
   & .features {
-    //existing styles...
     & .icon-wrapper {
       flex-basis: 18.6%;
       padding-right: 0.4%;
       & img {
         background: #99f6e4;
-        padding: 15px;
-        border-radius: 6px;
-        width: 48px;
+        padding: 1rem;
+        border-radius: 0.375rem;
+        width: 3rem;
       }
     }
     & .content-wrapper {
@@ -294,12 +285,12 @@ h1 {
     }
 
     & .video-wrapper {
-      height: 400px;
+      height: 25rem;
       @include media-breakpoint-down(sm) {
-        max-height: 243px;
+        max-height: 15rem;
       }
       @include media-breakpoint-only(md) {
-        max-height: 250px;
+        max-height: 15.625rem;
       }
 
       & .inline-svg {
@@ -350,10 +341,10 @@ h1 {
             max-width: 100%;
           }
           & .icon-left {
-            padding: 17px;
+            padding: 1rem;
             width: 3.5rem;
             height: 3.5rem;
-            border-radius: 8px;
+            border-radius: 0.5rem;
             & .inline-svg {
               width: 1.62rem;
               height: 1.62rem;
@@ -393,15 +384,16 @@ h1 {
     }
   }
 }
-// Top Bar
 
+// Top Bar
 #top-bar {
   background-color: $teal-600;
   color: #333;
   display: flex;
   align-items: flex-start;
-  padding: 11px;
+  padding: 0.75rem;
 }
+
 #top-bar p {
   margin: 0 auto 0 0;
   flex: 1;
@@ -411,6 +403,7 @@ h1 {
     color: $teal-600;
   }
 }
+
 #top-bar a {
   color: #fff;
   font-weight: 700;
@@ -435,13 +428,12 @@ h1 {
   border: none;
   background-color: transparent;
   color: #fff;
-  font-size: 20px;
+  font-size: 1.25rem;
   cursor: pointer;
   margin-left: auto; /* align to right */
 }
 
 // Call-to-Action
-
 .calltoaction {
   & h2 {
     font-size: 2.25rem;
@@ -459,8 +451,8 @@ h1 {
     background: $white;
     border: 1px solid $white;
     box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1), 0px 1px 2px rgba(0, 0, 0, 0.06);
-    border-radius: 6px;
-    padding: 13px 21px;
+    border-radius: 0.375rem;
+    padding: 0.75rem 1.25rem;
     font-size: 1rem;
     font-weight: 500;
     line-height: 1.5;
@@ -472,10 +464,9 @@ h1 {
     }
   }
 }
-//Footer
 
+//Footer
 footer {
-  //existing styles...
   & .logos {
     @include media-breakpoint-down(sm) {
       padding-left: 0;
@@ -490,18 +481,12 @@ footer {
         flex-basis: 100%;
         text-align: left;
       }
-      // @include media-breakpoint-down (xl){
-      //   flex-basis: 33%;
-      // }
     }
     & img {
       @include media-breakpoint-down(md) {
         flex-basis: 50%;
-        max-width: 160px;
+        max-width: 10rem;
       }
-      // @include media-breakpoint-down (xl){
-      //   flex-basis: 33%;
-      // }
     }
   }
 
@@ -530,17 +515,14 @@ footer {
 // filter-form styles
 
 .form-filter {
-  // .form-row > div{
-  //   flex: 1;
-  // }
   input::placeholder {
     color: $coolgray-500;
     font-size: 1rem;
   }
   & label {
     font-weight: 500;
-    font-size: 14px;
-    line-height: 20px;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
     color: $coolgray-700;
     & p {
       color: $coolgray-500;
@@ -553,7 +535,7 @@ footer {
       background: #ffffff;
       mix-blend-mode: normal;
       border: 1px solid $teal-600;
-      border-radius: 6px;
+      border-radius: 0.375rem;
       padding-block: 1.125rem;
 
       & .form-group-checkbox {
@@ -577,9 +559,10 @@ input[type="text"] {
   background: #ffffff;
   border: 1px solid #d1d5db;
   box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05);
-  border-radius: 6px;
+  border-radius: 0.375rem;
   padding-block: 0.625rem;
 }
+
 select#country {
   background: linear-gradient(
       to right,
@@ -596,14 +579,14 @@ select#country {
   background-position: 100% 100%;
   border: 1px solid #d1d5db;
   box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05);
-  border-radius: 6px;
+  border-radius: 0.375rem;
   padding-block: 0.625rem;
 }
 
 input[type="submit"] {
   background: #fde68a;
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1), 0px 1px 2px rgba(0, 0, 0, 0.06);
-  border-radius: 6px;
+  border-radius: 0.375rem;
   border: none;
   padding-block: 0.625rem;
   color: #78350f;
@@ -611,8 +594,8 @@ input[type="submit"] {
 
 a#advanced-options-toggle {
   font-weight: 500;
-  font-size: 16px;
-  line-height: 24px;
+  font-size: 1rem;
+  line-height: 1.5rem;
   color: #0f766e;
   text-decoration: none;
 }
@@ -686,6 +669,6 @@ dialog {
   background-color: $yellow-100;
   font-weight: 500;
   font-size: 0.95rem;
-  padding: .25rem .75rem;
-  border-radius: .5rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 0.5rem;
 }

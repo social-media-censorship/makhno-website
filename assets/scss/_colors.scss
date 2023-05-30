@@ -17,7 +17,6 @@ $teal-list: (
   "900": #134e4a,
 );
 
-
 $teal-50: map-get($teal-list, "50");
 $teal-100: map-get($teal-list, "100");
 $teal-200: map-get($teal-list, "200");
@@ -29,11 +28,10 @@ $teal-700: map-get($teal-list, "700");
 $teal-800: map-get($teal-list, "800");
 $teal-900: map-get($teal-list, "900");
 
-
 // Secondary Color: Cool Gray
 
 $coolgray-list: (
-  "50":  #f9fafb,
+  "50": #f9fafb,
   "100": #f3f4f6,
   "200": #e5e7eb,
   "300": #d1d5db,
@@ -45,7 +43,6 @@ $coolgray-list: (
   "900": #111827,
 );
 
-
 $coolgray-50: map-get($coolgray-list, "50");
 $coolgray-100: map-get($coolgray-list, "100");
 $coolgray-200: map-get($coolgray-list, "200");
@@ -56,8 +53,6 @@ $coolgray-600: map-get($coolgray-list, "600");
 $coolgray-700: map-get($coolgray-list, "700");
 $coolgray-800: map-get($coolgray-list, "800");
 $coolgray-900: map-get($coolgray-list, "900");
-
-  
 
 @each $value in $teal-list {
   .background-teal-#{nth($value, 1)} {
@@ -76,8 +71,7 @@ $coolgray-900: map-get($coolgray-list, "900");
     color: nth($value, 2) !important;
   }
 }
-  
-.background-white{
+
+.background-white {
   background-color: #fff;
 }
-  
