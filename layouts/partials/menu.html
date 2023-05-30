@@ -5,31 +5,21 @@
         {{ $theme := .Page.Params.theme }}
         {{ $type := .Page.Type }}
         {{ $home := .IsHome }}
-        <img src="/img/makhno_logo.svg" alt="makhno logo">
+        <img src="/img/makhno_logo.svg" alt="Makhno logo">
       </a>
       <button class="navbar-toggler" type="button" aria-label="Toggle navigation" onclick="openNav()">
         {{ partial "fontawesome.html" "light/bars" }}
       </button>
       <div class="collapse navbar-collapse flex-grow-0">
         <ul class="navbar-nav">
-
           {{- $firstUrlElement := print "/" (index (split .RelPermalink "/") 1) "/" -}}
           {{- range .Site.Menus.main -}}
-
           <li class="nav-item ms-5">
-
             <a class="nav-link {{ if eq ($firstUrlElement|lower) (.URL|lower) }}active{{end}}" {{ if eq
               ($firstUrlElement|lower) (.URL|lower) }}aria-current="page" {{end}} href="{{ .URL | absLangURL }}">{{
               .Name }} </a>
-
           </li>
-
           {{ end }}
-
-          <!-- <li class="nav-item ms-4 nav-item-lang"></li>
-              <a href='{{ "/request-a-demo/" | absLangURL }}' class="bnt main-bnt ms-4">{{ i18n "requestDemo" }}</a>
-            </li> -->
-
         </ul>
       </div>
     </nav>
@@ -45,45 +35,16 @@
           </div>
         </div>
         <div class="overlay-content">
-          <div class="container-lg pt-4 px-4">
+          <div class="container-lg">
             {{- $firstUrlElement := print "/" (index (split .RelPermalink "/") 1) "/" -}}
             <ul class="menu__list">
-
               {{- range .Site.Menus.main -}}
-
-              <li class="menu__item menu__dropdown menu__link {{ if .HasChildren }} drop-list {{ end }}">
-                {{ if .HasChildren }}
-                <a>
-                  <span class="menu__text">{{ .Name }}</span>
-                  {{ if .HasChildren }}<label class="drop-icon no-lang-label-m" for="{{ .Name }}">▾</label>{{ else }}
-                  <label class="drop-icon invisible" for="{{ .Name }}">.</label> {{ end }}
-                </a>
-                {{ else }}
-                <a href="{{ .URL | absLangURL }}">
-                  <span class="menu__text">{{ .Name }}</span>
-                  {{ if .HasChildren }}<label class="drop-icon" for="{{ .Name }}">▾</label>{{ else }} <label
-                    class="drop-icon invisible" for="{{ .Name }}">.</label> {{ end }}
-                </a>
-                {{ end }}
-
-                <!-- <input type="checkbox" id="{{ .Name }}" class="no-lang-input-m"> -->
-                {{ if .HasChildren }}
-
-                <ul class="sub-menu sub-menu-m">
-                  {{ range .Children }}
-                  <li>
-                    <a class="nav-link {{ if eq ($firstUrlElement|lower) (.URL|lower) }}active{{end}}" {{ if eq
-                      ($firstUrlElement|lower) (.URL|lower) }}aria-current="page" {{end}}
-                      href="{{ .URL | absLangURL }}">{{ .Name }}</a>
-                  </li>
-                  {{ end }}
-                </ul>
-                {{ end }}
+              <li class="nav-item">
+                <a class="nav-link {{ if eq ($firstUrlElement|lower) (.URL|lower) }}active{{end}}" {{ if eq
+                  ($firstUrlElement|lower) (.URL|lower) }}aria-current="page" {{end}} href="{{ .URL | absLangURL }}">{{
+                  .Name }} </a>
               </li>
               {{ end }}
-              <li class="menu__item menu__dropdown menu__link">
-
-              </li>
             </ul>
           </div>
         </div>
@@ -100,52 +61,4 @@
   function closeNav() {
     document.getElementById("navbar-mobile").style.height = "0%";
   }
-
-  // Make parent background white when open dropdown
-  const allInputs = document.querySelectorAll(".navbar-nav input");
-
-  allInputs.forEach(input => {
-    input.addEventListener("click", e => {
-      if (e.target.checked) {
-        e.target.parentElement.style.background = "#fff";
-
-      } else {
-        e.target.parentElement.style.background = "transparent";
-      }
-    })
-  })
-
-  // Close dropdown when click outside section
-
-  // window.onclick = function(e){
-  //    if (!e.target.matches('.drop-list')){
-  //     document.querySelector(".sub-menu-m").style.display = "none";
-  //     console.log('dsadas');
-  //   }
-  // }
-  // var mob_check = document.querySelector('.no-lang-input-m')
-  // if (mob_check.checked) {
-  //     console.log('mob test');
-  // };
-
-
-  function validate(d) {
-    var d = d || window.event, // make this works in different browsers 
-      checkNavbar = document.querySelector(".no-lang-input"),  // input
-      checkboxNavbar = document.querySelector(".no-lang-label");// label
-
-    if ([checkNavbar, checkboxNavbar].indexOf(d.target) < 0 && checkNavbar.checked) {
-      checkNavbar.checked = false;
-      document.querySelector(".drop-list").style.background = "transparent";
-      return false;
-    }
-  };
-  document.addEventListener("click", validate);
-  var storeDropdown = document.querySelector(".sub-menu"); // unordered list dropdown-menu
-
-  storeDropdown.addEventListener("click", function (d) {
-    d.stopPropagation();
-  });
-
-
 </script>
