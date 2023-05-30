@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.Language }}" itemscope itemtype="http://schema.org/WebPage">
+
+<head>
+   {{ partial "head.html" . }} 
+</head>
+
+<body class='{{ .Title | lower }}'>
+    
+    <svg id="fader" class="fade-out"></svg>
+    <script>fadeInPage()</script>
+   
+    <a class="screen-reader-text" href="#content">Skip to content</a>
+
+    {{ partial "header.html" . }}
+
+    <div class="container-fluid background-teal-50 py-4">
+        <div class="container-lg px-0 pt-5 pb-3">
+            <h1 class="test-results">{{ .Title }}</h1>
+            <p class="mb-2"><a id="test-url" href="#" target="_blank" rel="noopener noreferrer">You didn't set a URL to test</a></p>
+            <p class="mb-0" id="test-country">You didn't select the country</p>
+        </div>
+    </div>
+
+    <div id="content" class="content" role="main">
+        <div class="container-fluid">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-12 py-5">
+                        
+                        <article>
+                            <div class="post-content pt-4">
+                                {{ .Content }}
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    // Function to get the query parameters on load, by fetching the country code and content URL
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const country = urlParams.get("country");
+    const url = urlParams.get("url");
+    const urlPlaceholder = document.querySelector('#test-url');
+    const countryPlaceholder = document.querySelector('#test-country');
+
+    // Check if someone opens the page without using URL query parameters, if yes, show message
+    if (url !== "" ) {
+        urlPlaceholder.innerHTML = url;
+        urlPlaceholder.href = url;
+    }
+    else { 
+        urlPlaceholder.innerHTML = "You didn't set a URL to test"; 
+    }
+
+    if (country !== "" || country != null ) {
+        countryPlaceholder.innerHTML = country; 
+    }
+    else { 
+        countryPlaceholder.innerHTML = "You didn't select the country"; 
+    }
+    
+    // Make a request via Fetch API towards the backend on port 2002
+    // Method is POST, and response is in JSON
+    // Body contains the URL and the country code
+    fetch('https://localhost:2002/submission', {
+        method: 'POST',
+        headers: { 
+            'Content-Type': 'application/json' 
+        },
+        body: '{"url":$url,"countryCodes":[$country]}'
+    }).then(function (response) {
+    // The API call was successful!
+    if (response.ok) {
+        return response.json();
+    } 
+    else {
+        return Promise.reject(response);
+    }
+    }).then(function (data) {
+        // This is the JSON from our response
+        console.log(data);
+    }).catch(function (err) {
+        // There was an error
+        console.warn('Something went wrong.', err);
+    });
+    
+    </script>
+
+    {{ block "footer" . }}
+    {{ partial "footer.html" . }}
+    {{ end }}
+    
+</body>
+
+</html>
+
+
+
