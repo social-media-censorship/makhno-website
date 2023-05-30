@@ -601,14 +601,34 @@ a#advanced-options-toggle {
 }
 
 .inline-svg {
-  display: inline-block;
-  height: 1.5rem;
-  width: 1.5rem;
+  display: inline-flex;
+  justify-content: center;
+  height: 1em;
+  width: 1em;
+  top: 0.1em;
   position: relative;
 }
 
 #top-bar .inline-svg {
   display: flex;
+}
+
+#red-x .inline-svg {
+  height: 1.25em;
+  width: 1.25em;
+  top: 0;
+  border-radius: .5rem;
+  color: #B91C1C;
+}
+
+#green-results .inline-svg {
+  height: 1.25em;
+  width: 1.25em;
+  top: 0;
+  border-radius: .5rem;
+  padding: .5rem;
+  background-color: $teal-200;
+  color: $teal-800;
 }
 
 button#openModalDialog {

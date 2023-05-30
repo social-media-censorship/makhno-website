@@ -22,14 +22,21 @@
         </div>
     </div>
 
-    <div id="content" class="content" role="main">
+    <div id="content" class="content py-5" role="main">
         <div class="container-fluid">
-            <div class="container-lg">
-                <div class="row">
-                    <div class="col-xl-12 col-lg-12 col-md-12 col-12 py-5">
-                        test
+            <div class="container-lg px-0">
+                <section id="map-results-table">
+                    <div class="row">
+                        <h3 id="red-x" class="d-flex align-items-center">{{ partial "fontawesome.html" "solid/square-xmark" }} <span class="ms-2">Countries where content is blocked in the last 24h</span></h3>
+                        <hr>
                     </div>
-                </div>
+                </section>
+                <section id="past-results-table" class="py-4">
+                    <div class="row">
+                        <h3 id="green-results" class="d-flex align-items-center">{{ partial "fontawesome.html" "solid/flask" }} <span class="ms-2">Explore past test results for the same content</span></h3>
+                        <hr>
+                    </div>
+                </section>
             </div>
         </div>
     </div>
