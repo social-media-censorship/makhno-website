@@ -238,13 +238,12 @@ h1 {
   }
 
   & h1#styled-title {
-    color: $teal-700;
+    color: $coolgray-900;
     font-weight: 700;
     line-height: 100%;
     letter-spacing: -0.04em;
-    & span#first-word,
-    span#last-word {
-      color: $coolgray-900;
+    & span {
+      color: $teal-700;
     }
   }
 
