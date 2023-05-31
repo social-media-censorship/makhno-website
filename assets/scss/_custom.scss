@@ -541,6 +541,9 @@ footer {
     align-items: center;
     white-space: pre-wrap;
     text-align: center;
+    @include media-breakpoint-down(sm){
+      width: 46%;
+    }
 }
 
   & details {
