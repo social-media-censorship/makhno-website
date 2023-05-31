@@ -1,7 +1,5 @@
 +++
 title = "Methodology"
-subtitle = "Ipsum deserunt Lorem dolore non eiusmod commodo nisi pariatur."
-description = ""
 +++
 
 Duis nisi sit eu laboris ullamco id ea culpa enim.

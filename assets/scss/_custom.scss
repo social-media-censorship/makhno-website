@@ -532,15 +532,15 @@ footer {
     width: 23%; 
     margin: 1%;
     float: left;
-    overflow-wrap: revert;
-    word-wrap: break-word;   
     height: 50px;
     white-space: pre-wrap;
     display: flex;
     justify-content: center;
     align-items: center;
-    white-space: pre-wrap;
     text-align: center;
+    border: 1px solid $teal-400;
+    border-radius: .5rem;
+    cursor: pointer;
     @include media-breakpoint-down(sm){
       width: 46%;
     }
