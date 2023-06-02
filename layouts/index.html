@@ -23,43 +23,53 @@
         </div>
     </div>
 </div>
-
 <div class="container-fluid video-section mt-5" >  
     <div class="container-md  py-lg-5 my-5">
         <div class="row w-100 g-md-5 g-0">
                 <div class="col-md-6 col-12">
                     <div class="video-wrapper background-teal-100 d-flex justify-content-center align-items-center">
-
                         <dialog id="ModalVideo">
                             <div class="container">
-                                <iframe class="responsive-iframe" src="https://www.youtube-nocookie.com/embed/jNQXAC9IVRw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                                <video class="responsive-video" controls autoplay>
+                                    <source src="/video/small.mp4" type="video/mp4">
+                                    <source src="/video/small.webm" type="video/webm">
+                                    <source src="/video/small.ogv" type="video/ogg">
+                                    Your browser does not support the video tag.
+                                </video>
                             </div>
                         </dialog>
-                          
+                    
                         <button id="openModalDialog">{{ partial "fontawesome.html" "duotone/play" }}</button>
-                          
+                    
                         <script>
-                            var ModalVideo = document.getElementById('ModalVideo');
+                             var ModalVideo = document.getElementById('ModalVideo');
+                                var video = document.querySelector('.responsive-video');
+                                var openModalDialog = document.getElementById('openModalDialog');
 
-                            openModalDialog.addEventListener('click', function onOpen() {
-                                if (typeof ModalVideo.showModal === "function") {
-                                    ModalVideo.showModal();
-                                } 
-                                else {
-                                    alert("The <dialog> API is not supported by this browser");
-                                }
-                            });
-
-                            ModalVideo.addEventListener("click", event => {
-                                const rect = ModalVideo.getBoundingClientRect();
-                                    if (event.clientY < rect.top || event.clientY > rect.bottom ||
-                                        event.clientX < rect.left || event.clientX > rect.right) {
-                                        ModalVideo.close();
+                                openModalDialog.addEventListener('click', function onOpen() {
+                                    if (typeof ModalVideo.showModal === 'function') {
+                                        ModalVideo.showModal();
+                                        video.play();
+                                    } else {
+                                        alert('The <dialog> API is not supported by this browser');
                                     }
-                            });
-                        </script>
+                                });
 
+                                ModalVideo.addEventListener('click', function (event) {
+                                    const rect = ModalVideo.getBoundingClientRect();
+                                    if (
+                                        event.clientY < rect.top ||
+                                        event.clientY > rect.bottom ||
+                                        event.clientX < rect.left ||
+                                        event.clientX > rect.right
+                                    ) {
+                                        ModalVideo.close();
+                                        video.pause();
+                                    }
+                                });
+                        </script>
                     </div>
+                    
                 </div>
                 <div class="video-desc col-md-6 col-12 d-flex flex-column justify-content-center mt-md-inherit mt-md-5 mt-3">
                     <div class="title-wrapper pb-1">
