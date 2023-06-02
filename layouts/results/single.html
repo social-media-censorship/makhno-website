@@ -45,7 +45,7 @@
     // Function to get the query parameters on load, by fetching the country code and content URL
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
-    const country = urlParams.get("country");
+    const countries = urlParams.getAll("country");
     const url = urlParams.get("url");
     const urlPlaceholder = document.querySelector('#test-url');
     const countryPlaceholder = document.querySelector('#test-country');
@@ -59,8 +59,9 @@
         urlPlaceholder.innerHTML = "You didn't set a URL to test"; 
     }
 
-    if (country !== "" || country != null ) {
-        countryPlaceholder.innerHTML = country; 
+    if (countries !== "" || countries != null ) {
+        countryPlaceholder.innerHTML = countries; 
+        console.log("Selected countries:", countries);
     }
     else { 
         countryPlaceholder.innerHTML = "You didn't select the country"; 
