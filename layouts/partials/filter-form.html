@@ -1,7 +1,6 @@
 <form action="/results" class="form-filter py-md-1">
   <div class="form-row d-flex flex-wrap">
     <div class="form-group d-flex flex-column gap-1 px-md-3 pe-sm-3 my-3 col-md-12 col-sm-12 col-12">
-      <label for="country">Countries:</label>
 
       <!--surround the select box with a "custom-select" DIV element-->
       <div class="custom-select">
@@ -259,6 +258,8 @@
           <option value="ZM">Zambia</option>
           <option value="ZW">Zimbabwe</option>
         </select>
+       
+        
       </div>
     </div>
     <div class="form-group d-flex flex-column gap-1 px-md-3 ps-sm-3 my-3 col-md-12 col-sm-12 col-12">
@@ -297,63 +298,66 @@
 
 </form>
 <script>
-  /* Javascript code for creating a custom multiple select element*/
+
+// Get all elements with the class "custom-select"
 var customSelects = document.getElementsByClassName("custom-select");
 
+// Function to create a clear button
 function createClearButton(parentElement) {
   var clearButton = document.createElement("span");
   clearButton.innerHTML = "{{ partial "fontawesome.html" "regular/xmark" }}";
   clearButton.classList.add("clear-selected");
   clearButton.setAttribute("title", "Clear All");
-  clearButton.addEventListener("click", function(e) {
+  clearButton.addEventListener("click", function (e) {
     e.stopPropagation();
-    var select = parentElement.getElementsByTagName("select")[0];
-    Array.from(select.options).forEach(function(option) {
+    var select = parentElement.querySelector("select");
+    Array.from(select.options).forEach(function (option) {
       option.selected = false;
     });
     parentElement.querySelector(".select-selected").innerHTML = "Select countries:";
-    Array.from(parentElement.querySelectorAll(".same-as-selected")).forEach(function(item) {
+    Array.from(parentElement.querySelectorAll(".same-as-selected")).forEach(function (item) {
       item.classList.remove("same-as-selected");
     });
     parentElement.removeChild(this);
+    updateClearButtonVisibility(parentElement.querySelector(".select-selected"), select);
   });
   return clearButton;
 }
 
+// Function to handle option click
 function handleOptionClick(e) {
   e.stopPropagation();
   var optionValue = this.getAttribute("data-value");
-  var select = this.parentNode.parentNode.getElementsByTagName("select")[0];
-  var optionIndex = Array.from(select.options).findIndex(function(option) {
-    return option.value === optionValue;
-  });
+  var select = this.closest(".custom-select").querySelector("select");
+  var option = select.querySelector('option[value="' + optionValue + '"]');
+  option.selected = !option.selected;
   this.classList.toggle("same-as-selected");
-  select.options[optionIndex].selected = !select.options[optionIndex].selected;
-  var selectSelected = this.parentNode.parentNode.querySelector(".select-selected");
+  var selectSelected = this.closest(".custom-select").querySelector(".select-selected");
   selectSelected.innerHTML = getSelectedOptionsText(select);
   updateClearButtonVisibility(selectSelected, select);
 }
 
+// Function to get the text of selected options
 function getSelectedOptionsText(select) {
-  var selectedOptions = Array.from(select.options).filter(function(option) {
+  var selectedOptions = Array.from(select.options).filter(function (option) {
     return option.selected;
   });
-  var selectedText = selectedOptions.map(function(option) {
+  var selectedText = selectedOptions.map(function (option) {
     return option.text;
   });
   return selectedText.length > 0 ? selectedText.join(", ") : "Select countries:";
 }
 
+// Function to update clear button visibility
 function updateClearButtonVisibility(selectSelected, select) {
-  var selectedOptions = Array.from(select.options).filter(function(option) {
+  var selectedOptions = Array.from(select.options).filter(function (option) {
     return option.selected;
   });
   var clearButton = selectSelected.parentNode.querySelector(".clear-selected");
   if (selectedOptions.length > 0) {
     if (!clearButton) {
       clearButton = createClearButton(selectSelected.parentNode);
-      var arrow = selectSelected.parentNode.querySelector(".select-selected:after");
-      selectSelected.parentNode.insertBefore(clearButton, arrow);
+      selectSelected.parentNode.insertBefore(clearButton, selectSelected.nextSibling);
     }
   } else {
     if (clearButton) {
@@ -362,8 +366,9 @@ function updateClearButtonVisibility(selectSelected, select) {
   }
 }
 
+// Function to close all select dropdowns except the specified element
 function closeAllSelect(elmnt) {
-  Array.from(customSelects).forEach(function(selectElement) {
+  Array.from(customSelects).forEach(function (selectElement) {
     var selectItems = selectElement.querySelector(".select-items");
     var selectSelected = selectElement.querySelector(".select-selected");
     if (selectItems && selectItems !== elmnt) {
@@ -375,22 +380,37 @@ function closeAllSelect(elmnt) {
   });
 }
 
+// Function to handle document click
 function handleDocumentClick(e) {
   var target = e.target;
-  if (!target.classList.contains("select-selected")) {
+  if (!target.classList.contains("select-selected") && !target.classList.contains("select-search")) {
     closeAllSelect(null);
   }
 }
 
-Array.from(customSelects).forEach(function(selectElement) {
-  var select = selectElement.getElementsByTagName("select")[0];
-  var selectSelected = document.createElement("div");
-  selectSelected.setAttribute("class", "select-selected");
-  selectSelected.innerHTML = "Select countries:";
-  selectElement.appendChild(selectSelected);
+// Function to filter options based on search term
+function filterOptions(searchTerm, selectItems) {
+  var options = selectItems.querySelectorAll("div");
+  var searchValue = searchTerm.toLowerCase();
+
+  Array.from(options).forEach(function (option) {
+    if (!option.classList.contains("select-search")) {
+      var text = option.innerHTML.toLowerCase();
+      option.style.display = text.indexOf(searchValue) > -1 ? "" : "none";
+    }
+  });
+}
+
+// Loop through each custom select element
+Array.from(customSelects).forEach(function (selectElement) {
+  var select = selectElement.querySelector("select");
+
+  // Create select items div
   var selectItems = document.createElement("div");
   selectItems.setAttribute("class", "select-items select-hide");
-  Array.from(select.options).forEach(function(option, index) {
+
+  // Create select items for each option
+  Array.from(select.options).forEach(function (option, index) {
     if (index !== 0) {
       var selectItem = document.createElement("div");
       selectItem.innerHTML = option.innerHTML;
@@ -399,8 +419,17 @@ Array.from(customSelects).forEach(function(selectElement) {
       selectItems.appendChild(selectItem);
     }
   });
+
   selectElement.appendChild(selectItems);
-  selectSelected.addEventListener("click", function(e) {
+
+  // Create select selected div
+  var selectSelected = document.createElement("div");
+  selectSelected.setAttribute("class", "select-selected");
+  selectSelected.innerHTML = "Select countries:";
+  selectElement.appendChild(selectSelected);
+
+  // Event listener for opening/closing select dropdown
+  selectSelected.addEventListener("click", function (e) {
     e.stopPropagation();
     closeAllSelect(selectItems);
     selectItems.classList.toggle("select-hide");
@@ -408,6 +437,56 @@ Array.from(customSelects).forEach(function(selectElement) {
   });
 });
 
+// Create search input
+var searchInput = document.createElement("input");
+searchInput.setAttribute("class", "select-search");
+searchInput.setAttribute("type", "text");
+searchInput.setAttribute("placeholder", "Search countries...");
+searchInput.addEventListener("input", function (e) {
+  var searchTerm = e.target.value;
+  Array.from(customSelects).forEach(function (selectElement) {
+    var selectItems = selectElement.querySelector(".select-items");
+    filterOptions(searchTerm, selectItems);
+  });
+});
+
+// Event listener for opening all select dropdowns
+searchInput.addEventListener("click", function () {
+  openAllSelect();
+});
+// Event listener for checking if search input has a value
+searchInput.addEventListener("input", function () {
+  var searchTerm = searchInput.value;
+  if (searchTerm.length > 0) {
+    openAllSelect();
+  }
+});
+
+function openAllSelect() {
+  Array.from(customSelects).forEach(function (selectElement) {
+    var selectItems = selectElement.querySelector(".select-items");
+    selectItems.classList.remove("select-hide");
+  });
+}
+
+// Create label and wrapper for search input
+var searchLabel = document.createElement("label");
+searchLabel.setAttribute("for", "country");
+searchLabel.textContent = "Countries:";
+
+var searchWrapper = document.createElement("div");
+searchWrapper.classList.add("label-search");
+searchWrapper.appendChild(searchLabel);
+searchWrapper.appendChild(searchInput);
+
+// Insert search wrapper before the custom select
+var customSelect = document.querySelector(".custom-select");
+var parentDiv = customSelect.parentNode;
+
+parentDiv.insertBefore(searchWrapper, customSelect);
+
+// Event listener for document click
 document.addEventListener("click", handleDocumentClick);
+
 
 </script>
