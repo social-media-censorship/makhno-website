@@ -796,3 +796,9 @@ dialog {
   padding: 0.25rem 0.75rem;
   border-radius: 0.5rem;
 }
+
+
+.past-results td,
+.last24-results td {
+  padding: 8px; /* Adjust the padding value to your desired gap size */
+}
