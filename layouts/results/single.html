@@ -28,33 +28,31 @@
                 <section id="map-results-table">
                     <div class="row">
                         <h3 id="red-x" class="d-flex align-items-center">{{ partial "fontawesome.html" "solid/square-xmark" }} <span class="ms-2">Countries where content is blocked in the last 24h</span></h3>
-                        <hr>
+                        <hr class="mx-auto mb-4">
                     </div>
                     <table class="last24-results">
                         <thead>
                           <tr>
-                            <th>Status</th>
-                            <th>ID</th>
-                            <th>Date</th>
-                            <th>Vantage Point</th>
+                            <th>RESULT</th>                   
+                            <th>DATE</th>
+                            <th>TESTED FROM</th>
                           </tr>
                         </thead>
                         <tbody id="table-body-last24"></tbody>
                       </table>
-                      <p id="table-message-last24" class="text-muted"></p>
+                      <p id="table-message-last24" class="text-muted text-center pt-3 fs-5"></p>
                 </section>
                 <section id="past-results-table" class="py-4">
                     <div class="row">
                         <h3 id="green-results" class="d-flex align-items-center">{{ partial "fontawesome.html" "solid/flask" }} <span class="ms-2">Explore past test results for the same content</span></h3>
-                        <hr>
+                        <hr class="mx-auto mb-4">
                     </div>
                     <table class="past-results">
                         <thead>
                           <tr>
-                            <th>Status</th>
-                            <th>ID</th>
-                            <th>Date</th>
-                            <th>Vantage Point</th>
+                            <th>RESULT</th>                   
+                            <th>DATE</th>
+                            <th>TESTED FROM</th>
                           </tr>
                         </thead>
                         <tbody id="table-body-past"></tbody>
@@ -398,8 +396,8 @@
      tableBodyPast.innerHTML = '';
      tableBodyLast24.innerHTML = '';
 
-     // Get the subject ID from the data
-     var subjectId = data.subject.id;
+    //  // Get the subject ID from the data
+    //  var subjectId = data.subject.id;
 
      // Get the past and last24 arrays from the data
      var pastArray = data.past;
@@ -418,14 +416,29 @@
 
                  // Create cells for each column
                  var statusCell = row.insertCell();
-                 var idCell = row.insertCell();
+                //  var idCell = row.insertCell();
                  var dateCell = row.insertCell();
                  var vantagePointCell = row.insertCell();
 
-                 // Set the cell values
-                 statusCell.textContent = array[i].status;
-                 idCell.textContent = subjectId; // Use the subject ID
-                 dateCell.textContent = new Date(array[i].checkTimeUTC).toLocaleString(); // Format the date
+                  
+                // Create a span element for the status text
+                var statusSpan = document.createElement('span');
+
+                // Set the text content of the span
+                statusSpan.textContent = array[i].status;
+
+                // Add class based on status
+                statusSpan.classList.add(getStatusClass(array[i].status));
+
+                // Append the span element to the status cell
+                statusCell.appendChild(statusSpan);
+           
+                //  idCell.textContent = subjectId; // Use the subject ID
+                dateCell.textContent = new Date(array[i].checkTimeUTC).toLocaleDateString('en-US', {
+                    day: 'numeric',
+                    month: 'long',
+                    year: 'numeric'
+                });
                  // Get the full country names based on the vantage point country codes
                  var vantagePointCodes = array[i].vantagePoint.split(',');
                  var vantagePointNames = vantagePointCodes.map(code => countryNames[code.trim()]);
@@ -433,7 +446,19 @@
              }
          }
      }
-
+    // Function to get the class based on the status
+    function getStatusClass(status) {
+    switch (status) {
+        case 'not reachable':
+        return 'not_reachable';
+        case 'reachable':
+        return 'reachable';
+        case 'validation not possible':
+        return 'validation_not_possible';
+        default:
+        return '';
+    }
+    }
      // Create the past table if it has data
      if (pastArray.length > 0) {
          createTable(pastArray, tableBodyPast, messagePast);
