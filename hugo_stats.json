@@ -205,6 +205,10 @@
       "py-sm-5",
       "responsive-video",
       "results",
+      "results-content",
+      "results-list",
+      "results-map",
+      "results-section",
       "row",
       "screen-reader-text",
       "socials",
@@ -219,6 +223,7 @@
       "text-start",
       "title",
       "title-wrapper",
+      "toggle-switch",
       "us",
       "video-desc",
       "video-section",
@@ -238,6 +243,8 @@
       "openModalDialog",
       "past-results-table",
       "red-x",
+      "showList",
+      "showMap",
       "styled-title",
       "table-body-last24",
       "table-body-past",
@@ -246,7 +253,8 @@
       "test-country",
       "test-url",
       "top-bar",
-      "url"
+      "url",
+      "world-map"
     ]
   }
 }

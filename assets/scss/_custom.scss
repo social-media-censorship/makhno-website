@@ -868,3 +868,38 @@ section#past-results-table{
   }
 
 }
+
+
+
+
+
+/* Add CSS to hide the map section by default */
+.results-map {
+  display: block;
+  height: 0;
+  overflow-y: hidden;
+}
+
+/* Styling for the toggle switch */
+.toggle-switch {
+  display: flex;
+  justify-content: end;
+  margin-bottom: 20px;
+}
+
+.toggle-switch button {
+  padding: 8px 16px;
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+  font-size: 16px;
+  color: #000;
+}
+
+.toggle-switch .active {
+  font-weight: bold; /* Make the selected option bold or add other styling */
+}
+
+.selected {
+  fill: blue; /* Replace 'blue' with the desired color for selected countries */
+}
