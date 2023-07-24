@@ -903,3 +903,12 @@ section#past-results-table{
 .selected {
   fill: blue; /* Replace 'blue' with the desired color for selected countries */
 }
+
+.error-section{
+
+  background-image: url(../../img/earth.png);
+  min-height: 60vh;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+}

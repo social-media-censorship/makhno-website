@@ -83,6 +83,19 @@
             </div>
         </div>
     </div>
+    <div id="error-content" class="content py-5 d-none">
+      <div class="container-fluid">
+        <div class="container-lg px-0">
+            <section class="error-section">
+              <div class="error-wrapper d-flex flex-column align-items-center">
+                <div id="error-icon" class="icon"></div>
+                <div id="error-title" class="title"></div>
+                <div id="error-description" class="description"></div>
+              </div>
+            </section>
+        </div>
+      </div>
+    </div>
 
     <script>
 // Function to get the query parameters on load, by fetching the country code and content URL
@@ -92,6 +105,13 @@
  const url = decodeURIComponent(urlParams.get("url"));
  const urlPlaceholder = document.querySelector('#test-url');
  const countryPlaceholder = document.querySelector('#test-country');
+ const errorContentElement = document.getElementById("error-content");
+ const contentElement = document.getElementById("content");
+ const errorTitle = document.getElementById("error-title");
+ const errorDesc = document.getElementById("error-description");
+ const errorIcon = document.getElementById("error-icon");
+
+
 
  // Define the mapping of country codes to full names
 
@@ -356,23 +376,41 @@
 
  const countryCodes = countries.map(code => `"${code}"`);
 
+ console.log(countries.length);
 
  // Check if someone opens the page without using URL query parameters, if yes, show message
- if (url !== "") {
+ if (url == "" && countries.length == 0) {
+  errorContentElement.classList.remove("d-none");
+  contentElement.classList.add("d-none");
+  errorIcon.innerHTML="<img src='../../img/query.svg'>"
+  errorTitle.innerHTML="<h1>No Search Query</h1>"
+  errorDesc.innerHTML="<p>Your search box is empty. Please enter a country and a URL</p>"
+ }
+ else if (url == ""  && countries.length > 0) {
+    //  urlPlaceholder.innerHTML = url;
+    //  urlPlaceholder.href = url;
+    countryPlaceholder.innerHTML = countryFullNames.join(", ");
+  errorContentElement.classList.remove("d-none");
+  contentElement.classList.add("d-none");
+  errorIcon.innerHTML="<img src='../../img/query.svg'>"
+  errorTitle.innerHTML="<h1>No Search Query</h1>"
+  errorDesc.innerHTML="<p>Your search box is empty. Please enter a URL</p>"
+ }
+  else if (url !== ""  && countries.length == 0){
+    urlPlaceholder.innerHTML = url;
+     urlPlaceholder.href = url;
+  errorContentElement.classList.remove("d-none");
+  contentElement.classList.add("d-none");
+  errorIcon.innerHTML="<img src='../../img/query.svg'>"
+  errorTitle.innerHTML="<h1>No Search Query</h1>"
+  errorDesc.innerHTML="<p>Your search box is empty. Please enter a country</p>"
+ }
+else {
      urlPlaceholder.innerHTML = url;
      urlPlaceholder.href = url;
- } else {
-     urlPlaceholder.innerHTML = "You didn't set a URL to test";
- }
-
- if (countries !== "" || countries != null) {
      countryPlaceholder.innerHTML = countryFullNames.join(", ");
-     console.log("Selected countries:", countries);
-     console.log(url);
-     console.log(countryCodes);
- } else {
-     countryPlaceholder.innerHTML = "You didn't select the country";
- }
+}
+
 // Function to get the class based on the status
 function getStatusClass(status) {
   switch (status) {
@@ -481,7 +519,7 @@ console.log(countries);
     var status = data[i].status;
 
      // Add selected countries with a new status "selected" to the map data
-  for (var j = 0; j < countries.length; j++) {
+  for (var j = 0; j <= countries.length; j++) {
     var countryCode2 = countries[j];
     if (!mapData[countryCode2]) {
       // If the selected country data is not already present, add it
@@ -525,7 +563,7 @@ console.log(countries);
         scale: {
           'not_reachable': '#7f1d1d', // Set colors for different statuses
           'reachable': '#00FF00',
-          'validation_not_possible': '#FFFF00',
+          'Validation not possible	': '#FFFF00',
           'selected': '#D97706', // Set color for selected countries
         },
         legend: {
@@ -546,115 +584,115 @@ console.log(countries);
  // Body contains the URL and the country code
  const urlC = 'https://cors-anywhere.herokuapp.com/https://makhno.net/submission'; // Using a proxy temporary to avoid cors policy issues
 
-//  fetch(urlC, {
-//      method: 'POST',
-//      headers: {
-//          'Content-Type': 'application/json',
-//          'x-requested-with': 'XMLHttpRequest',
-//      },
+ fetch(urlC, {
+     method: 'POST',
+     headers: {
+         'Content-Type': 'application/json',
+         'x-requested-with': 'XMLHttpRequest',
+     },
 
-//      body: '{"url":"' + url + '","countryCodes":[' + countryCodes + '],"marker":"set-by-advanced-options"}'
+     body: '{"url":"' + url + '","countryCodes":[' + countryCodes + '],"marker":"set-by-advanced-options"}'
 
 
-//  }).then(function(response) {
-//      // The API call was successful!
-//      if (response.ok) {
-//          return response.json();
-//      } else {
-//          return Promise.reject(response);
-//      }
-//  }).then(function(data) {
-//      // This is the JSON from our response
-//      console.log(data);
-//      createDynamicTables(data);
-//      if (data.past.length > 0) {
-//       populateWorldMap(data.past); // Use data.past if available
-//     } else {
-//       console.log('No past data available for the world map.');
-//     }
-//  }).catch(function(err) {
-//      // There was an error
-//      console.warn('Something went wrong.', err);
-//  });
+ }).then(function(response) {
+     // The API call was successful!
+     if (response.ok) {
+         return response.json();
+     } else {
+         return Promise.reject(response);
+     }
+ }).then(function(data) {
+     // This is the JSON from our response
+     
+     createDynamicTables(data);
+     if (data.last24.length >= 0) {
+      populateWorldMap(data.last24, countries); // Use data.past if available
+    } else {
+      console.log('No past data available for the world map.');
+    }
+ }).catch(function(err) {
+     // There was an error
+     console.warn('Something went wrong.', err);
+ });
 
 
 //*** Testing with dummy data *****//    TO BE REMOVED
 //*********************************//
 
-const dummyData = {
-  "subject": {
-    "platform": "youtube",
-    "details": {
-      "videoId": "jfKtPsjJRdk"
-    },
-    "nature": "video",
-    "href": "https://www.youtube.com/watch?v=jfKtPsjJRdk",
-    "supported": true,
-    "id": "3e83ffdb69be57d810b2f301d5cf629c8b775265",
-    "creationTime": "2023-07-21T16:24:09.837Z",
-    "marker": "set-by-advanced-options",
-    "countryCodes": ["AO", "AG", "AM"],
-    "inserted": false
-  },
-  "testId": "my bad, this field should be removed",
-  "last24": [
-    {
-      "vantagePoint": "PK",
-      "status": "not reachable",
-      "checkTimeUTC": "2023-07-21T11:54:13.518Z"
-    },
-    {
-      "vantagePoint": "AL",
-      "status": "reachable",
-      "checkTimeUTC": "2023-07-21T04:54:21.559Z"
-    },
-    {
-      "vantagePoint": "IT",
-      "status": "validation not possible",
-      "checkTimeUTC": "2023-07-21T20:54:31.220Z"
-    },
-    {
-      "vantagePoint": "RU",
-      "status": "reachable",
-      "checkTimeUTC": "2023-07-21T20:54:31.220Z"
-    },
-    {
-      "vantagePoint": "CA",
-      "status": "not reachable",
-      "checkTimeUTC": "2023-07-21T20:54:31.220Z"
-    }
-  ],
-  "past": [
-  {
-      "vantagePoint": "PK",
-      "status": "reachable",
-      "checkTimeUTC": "2023-07-05T11:54:13.518Z"
-    },
-    {
-      "vantagePoint": "AL",
-      "status": "not reachable",
-      "checkTimeUTC": "2023-06-06T04:54:21.559Z"
-    },
-    {
-      "vantagePoint": "IT",
-      "status": "validation not possible",
-      "checkTimeUTC": "2023-06-06T20:54:31.220Z"
-    }
-  ]
-};
-// Replace the fetch call with this dummy data
-function fetchDataAndPopulate() {
+// const dummyData = {
+//   "subject": {
+//     "platform": "youtube",
+//     "details": {
+//       "videoId": "jfKtPsjJRdk"
+//     },
+//     "nature": "video",
+//     "href": "https://www.youtube.com/watch?v=jfKtPsjJRdk",
+//     "supported": true,
+//     "id": "3e83ffdb69be57d810b2f301d5cf629c8b775265",
+//     "creationTime": "2023-07-21T16:24:09.837Z",
+//     "marker": "set-by-advanced-options",
+//     "countryCodes": ["AO", "AG", "AM"],
+//     "inserted": false
+//   },
+//   "testId": "my bad, this field should be removed",
+//   "last24": [
+//     {
+//       "vantagePoint": "PK",
+//       "status": "not reachable",
+//       "checkTimeUTC": "2023-07-21T11:54:13.518Z"
+//     },
+//     {
+//       "vantagePoint": "AL",
+//       "status": "reachable",
+//       "checkTimeUTC": "2023-07-21T04:54:21.559Z"
+//     },
+//     {
+//       "vantagePoint": "IT",
+//       "status": "validation not possible",
+//       "checkTimeUTC": "2023-07-21T20:54:31.220Z"
+//     },
+//     {
+//       "vantagePoint": "RU",
+//       "status": "reachable",
+//       "checkTimeUTC": "2023-07-21T20:54:31.220Z"
+//     },
+//     {
+//       "vantagePoint": "CA",
+//       "status": "not reachable",
+//       "checkTimeUTC": "2023-07-21T20:54:31.220Z"
+//     }
+//   ],
+//   "past": [
+//   {
+//       "vantagePoint": "PK",
+//       "status": "reachable",
+//       "checkTimeUTC": "2023-07-05T11:54:13.518Z"
+//     },
+//     {
+//       "vantagePoint": "AL",
+//       "status": "not reachable",
+//       "checkTimeUTC": "2023-06-06T04:54:21.559Z"
+//     },
+//     {
+//       "vantagePoint": "IT",
+//       "status": "validation not possible",
+//       "checkTimeUTC": "2023-06-06T20:54:31.220Z"
+//     }
+//   ]
+// };
+// // Replace the fetch call with this dummy data
+// function fetchDataAndPopulate() {
 
-  createDynamicTables(dummyData);
-  if (dummyData.past.length > 0) {
-    populateWorldMap(dummyData.last24, countries); // Use dummyData.last24 if available
-  } else {
-    console.log('No past data available for the world map.');
-  }
-}
+//   createDynamicTables(dummyData);
+//   if (dummyData.past.length > 0) {
+//     populateWorldMap(dummyData.last24, countries); // Use dummyData.last24 if available
+//   } else {
+//     console.log('No past data available for the world map.');
+//   }
+// }
 
-// Call the function to fetch data and populate the tables and map
-fetchDataAndPopulate();
+// // Call the function to fetch data and populate the tables and map
+// fetchDataAndPopulate();
 
 
 
