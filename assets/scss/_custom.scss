@@ -788,6 +788,9 @@ dialog {
   font-weight: 500;
   text-decoration: underline;
   letter-spacing: -0.025em;
+  @include media-breakpoint-down (md){
+    font-size: 1rem;
+  }
 }
 
 #test-country {
@@ -806,6 +809,9 @@ section#past-results-table{
   hr{
     width: calc(100% - 1.5rem);
     color: $coolgray-400;
+    @include media-breakpoint-down (sm){
+      visibility: hidden;
+    }
   }
 }
 
@@ -884,31 +890,109 @@ section#past-results-table{
 .toggle-switch {
   display: flex;
   justify-content: end;
-  margin-bottom: 20px;
+  button{
+    color:$coolgray-500;
+    cursor: pointer;
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 1.25rem;
+    border:none;
+    background: transparent;
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.375rem;
+    &.active{
+      background-color: $teal-100;
+      color: $teal-700;
+    }
+  }
 }
 
-.toggle-switch button {
-  padding: 8px 16px;
-  cursor: pointer;
-  border: none;
-  background-color: transparent;
-  font-size: 16px;
-  color: #000;
+/* Hide the map on mobile */
+@media screen and (max-width: 767px) {
+  #world-map,.toggle-switch,h3#red-x{
+    display: none!important;
+  }
 }
 
-.toggle-switch .active {
-  font-weight: bold; /* Make the selected option bold or add other styling */
-}
+
 
 .selected {
   fill: blue; /* Replace 'blue' with the desired color for selected countries */
 }
 
 .error-section{
-
   background-image: url(../../img/earth.png);
   min-height: 60vh;
   background-size: 100% 100%;
   background-repeat: no-repeat;
   background-position: center;
+  & 
+  .icon{ 
+    img {
+      max-width: 200px;
+    }
+  }
+  .title {
+    color: $coolgray-900;
+    font-size: 2.25rem;
+    font-weight: 700;
+    line-height: 3.75rem;
+    @include media-breakpoint-down (md){
+      font-size: 1.25rem;
+    } 
+  }
+  .description{
+    color: $coolgray-900;
+    font-size: 1.5rem;
+    font-weight: 500;
+    line-height: 3.75rem; 
+    @include media-breakpoint-down (md) {
+      font-size: 1rem;
+      line-height: 1.2;
+    }
+  }
+  @include media-breakpoint-down (md) {
+    min-height: 40vh;
+  }
+}
+
+.toggle-switch-mobile
+{
+  background-color: $coolgray-100;
+  padding: 0.125rem;
+  border-radius: .5rem;
+
+  button {
+    padding: 0.5625rem 1.5625rem;
+    width: 49%;
+    border: none;
+    color: $coolgray-700;
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 1.25rem;
+    background: transparent;
+    &.active{
+      border-radius: 0.375rem;
+      border: 1px solid var(--gray-200, #E5E7EB);
+      background: var(--white, #FFF);
+
+      /* shadow/sm */
+      box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.05);
+    }
+  }
+} 
+
+
+.jvectormap-tip {
+  background: #ffffff!important;
+  color: black!important;
+  font-size: 1.25rem;
+  padding: 5px;
+  filter: drop-shadow(0px 3.009795665740967px 15.427142143249512px rgba(20, 0, 66, 0.02)) drop-shadow(0px 6.83848762512207px 27.929677963256836px rgba(20, 0, 66, 0.03)) drop-shadow(0px 11.902084350585938px 36.94927215576172px rgba(20, 0, 66, 0.03)) drop-shadow(0px 18.907543182373047px 41.85419845581055px rgba(20, 0, 66, 0.04)) drop-shadow(0px 29.172935485839844px 42.28558349609375px rgba(20, 0, 66, 0.04)) drop-shadow(0px 45.52207946777344px 40.19178771972656px rgba(20, 0, 66, 0.04)) drop-shadow(0px 75.57373046875px 49.097740173339844px rgba(20, 0, 66, 0.05)) drop-shadow(0px 151px 98px rgba(20, 0, 66, 0.07));
+}
+.jvectormap-legend {
+  background: white!important;
+  color: black!important;
+  border-radius: 3px;
+  border: 1px solid;
 }

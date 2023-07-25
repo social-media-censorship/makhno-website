@@ -31,19 +31,32 @@
     <div id="content" class="content py-5" role="main">
         <div class="container-fluid">
             <div class="container-lg px-0">
-                <section id="map-results-table" class="results-section">
+              <section class="d-block d-md-none">
+                <div class="row">
+                  <h3 id="green-results" class="d-flex align-items-center">{{ partial "fontawesome.html" "solid/flask" }} <span class="ms-2">Explore past test results for the same content</span></h3>           
+                </div> 
+                <div class="toggle-switch-mobile mt-2 text-center">
+                  <button id="showPast" class="active">All Time</button>
+                  <button id="showLast24">Last 24 Hours</button>     
+                </div> 
+              </section>
+              
+                <section id="map-results-table" class="results-section d-none d-md-block">
                     <div class="row">
-                        <h3 id="red-x" class="d-flex align-items-center">{{ partial "fontawesome.html" "solid/square-xmark" }} <span class="ms-2">Countries where content is blocked in the last 24h</span></h3>
-                        <hr class="mx-auto mb-4">
-                    </div>                 
-                      <div class="results-content">
-                          <!-- Toggle Switch -->
-                        <div class="toggle-switch">
+                        <h3 id="red-x" class="d-flex align-items-center">{{ partial "fontawesome.html" "solid/square-xmark" }} <span class="ms-2">Countries where content is blocked in the last 24h</span>
+                          <div class="toggle-switch ms-auto">
                             <button id="showList" class="active">List</button>
                             <button id="showMap">Map</button>
                         </div>
-                        <div class="results-list">
-                            <table class="last24-results">
+                        </h3>
+                         
+                        <hr class="mx-auto mb-4 ">
+                    </div>      
+                          
+                      <div class="results-content">
+                        
+                        <div class="results-list d-none d-md-block" id="last24Table">
+                            <table class="last24-results" >
                                 <thead>
                                   <tr>
                                     <th>RESULT</th>                   
@@ -63,11 +76,12 @@
 
                 </section>
                 <section id="past-results-table" class="py-4">
-                    <div class="row">
+                    <div class="row d-none d-md-block">
                         <h3 id="green-results" class="d-flex align-items-center">{{ partial "fontawesome.html" "solid/flask" }} <span class="ms-2">Explore past test results for the same content</span></h3>
                         <hr class="mx-auto mb-4">
                     </div>
-                    <table class="past-results">
+                    <div class="results-list" id="pastTable">
+                      <table class="past-results">
                         <thead>
                           <tr>
                             <th>RESULT</th>                   
@@ -78,6 +92,8 @@
                         <tbody id="table-body-past"></tbody>
                       </table>
                       <p id="table-message-past" class="text-muted"></p>
+                    </div>
+                    
                 </section>
 
             </div>
@@ -86,7 +102,7 @@
     <div id="error-content" class="content py-5 d-none">
       <div class="container-fluid">
         <div class="container-lg px-0">
-            <section class="error-section">
+            <section class="error-section d-flex justify-content-center align-items-center">
               <div class="error-wrapper d-flex flex-column align-items-center">
                 <div id="error-icon" class="icon"></div>
                 <div id="error-title" class="title"></div>
@@ -382,9 +398,9 @@
  if (url == "" && countries.length == 0) {
   errorContentElement.classList.remove("d-none");
   contentElement.classList.add("d-none");
-  errorIcon.innerHTML="<img src='../../img/query.svg'>"
-  errorTitle.innerHTML="<h1>No Search Query</h1>"
-  errorDesc.innerHTML="<p>Your search box is empty. Please enter a country and a URL</p>"
+  errorIcon.innerHTML="<img src='../../img/svg/query.svg'>"
+  errorTitle.innerHTML="No Search Query"
+  errorDesc.innerHTML="Your search box is empty. Please enter a country and a URL"
  }
  else if (url == ""  && countries.length > 0) {
     //  urlPlaceholder.innerHTML = url;
@@ -392,24 +408,25 @@
     countryPlaceholder.innerHTML = countryFullNames.join(", ");
   errorContentElement.classList.remove("d-none");
   contentElement.classList.add("d-none");
-  errorIcon.innerHTML="<img src='../../img/query.svg'>"
-  errorTitle.innerHTML="<h1>No Search Query</h1>"
-  errorDesc.innerHTML="<p>Your search box is empty. Please enter a URL</p>"
+  errorIcon.innerHTML="<img src='../../img/svg/query.svg'>"
+  errorTitle.innerHTML="No Search Query"
+  errorDesc.innerHTML="Your search box is empty. Please enter a URL"
  }
   else if (url !== ""  && countries.length == 0){
     urlPlaceholder.innerHTML = url;
      urlPlaceholder.href = url;
   errorContentElement.classList.remove("d-none");
   contentElement.classList.add("d-none");
-  errorIcon.innerHTML="<img src='../../img/query.svg'>"
-  errorTitle.innerHTML="<h1>No Search Query</h1>"
-  errorDesc.innerHTML="<p>Your search box is empty. Please enter a country</p>"
+  errorIcon.innerHTML="<img src='../../img/svg/query.svg'>"
+  errorTitle.innerHTML="No Search Query"
+  errorDesc.innerHTML="Your search box is empty. Please enter a country"
  }
 else {
      urlPlaceholder.innerHTML = url;
      urlPlaceholder.href = url;
      countryPlaceholder.innerHTML = countryFullNames.join(", ");
 }
+
 
 // Function to get the class based on the status
 function getStatusClass(status) {
@@ -463,9 +480,8 @@ function createDynamicTables(data) {
                  var statusCell = row.insertCell();
                 //  var idCell = row.insertCell();
                  var dateCell = row.insertCell();
-                 var vantagePointCell = row.insertCell();
+                 var vantagePointCell = row.insertCell();   
 
-                  
                 // Create a span element for the status text
                 var statusSpan = document.createElement('span');
 
@@ -511,27 +527,19 @@ function createDynamicTables(data) {
 function populateWorldMap(data, countries) {
   // Create an object to store the data in the format expected by jVectorMap
   var mapData = {};
-
-console.log(countries);
-  // Iterate over the fetched data and add it to the mapData object
-  for (var i = 0; i < data.length; i++) {
+ // Add selected countries with a new status "selected" to the map data
+ for (var j = 0; j < countries.length; j++) {
+    var countryCode2 = countries[j];
+    mapData[countryCode2] = 'selected';
+  }
+// Update the status of the countries based on the data
+for (var i = 0; i < data.length; i++) {
     var countryCode = data[i].vantagePoint.split(',')[0].trim();
     var status = data[i].status;
-
-     // Add selected countries with a new status "selected" to the map data
-  for (var j = 0; j <= countries.length; j++) {
-    var countryCode2 = countries[j];
-    if (!mapData[countryCode2]) {
-      // If the selected country data is not already present, add it
-      mapData[countryCode2] = 'selected';
-    }
-  }
-
     // Set the status of the country in the map data
     mapData[countryCode] = getStatusClass(status);
-    mapData[countryCode2] = getStatusClass(status);
   }
-
+console.log(mapData);
   // Initialize the jVectorMap with the mapData
   $('#world-map').vectorMap({
     map: 'world_mill',
@@ -561,9 +569,9 @@ console.log(countries);
       regions: [{
         values: mapData,
         scale: {
-          'not_reachable': '#7f1d1d', // Set colors for different statuses
+          'not_reachable': '#ef2020', // Set colors for different statuses
           'reachable': '#00FF00',
-          'Validation not possible	': '#FFFF00',
+          'validation_not_possible	': '#FFFF00',
           'selected': '#D97706', // Set color for selected countries
         },
         legend: {
@@ -571,6 +579,8 @@ console.log(countries);
           title: 'Test Status',
           labelRender: function(valueText) {
             // Customize legend labels, if needed
+            valueText = valueText.split('_').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+            valueText = valueText.replace(/_/g, ' ');
             return valueText;
           },
         },
@@ -603,17 +613,36 @@ console.log(countries);
      }
  }).then(function(data) {
      // This is the JSON from our response
-     
      createDynamicTables(data);
-     if (data.last24.length >= 0) {
+     if (data.subject.supported === false) {
+      // Run your code here
+      console.log("The 'supported' property is false. Running something...");
+      errorContentElement.classList.remove("d-none");
+      contentElement.classList.add("d-none");
+      errorIcon.innerHTML="<img src='../../img/svg/loop.svg'>"
+      errorTitle.innerHTML="This URL is not supported"
+      errorDesc.innerHTML="Try another URL or update your filter settings"
+      // You can replace the console.log statement with your desired code.
+    } else if (data.subject.supported === true && data.subject.inserted === true ) {
+      console.log("The 'supported' property is true. Url not scanned");
+      errorContentElement.classList.remove("d-none");
+      contentElement.classList.add("d-none");
+      errorIcon.innerHTML="<img src='../../img/svg/loop.svg'>"
+      errorTitle.innerHTML="Results not found"
+      errorDesc.innerHTML="Refresh the page after few minutes for the results"
+    }
+    if (data.last24.length >= 0) {
       populateWorldMap(data.last24, countries); // Use data.past if available
     } else {
       console.log('No past data available for the world map.');
+     
     }
  }).catch(function(err) {
      // There was an error
      console.warn('Something went wrong.', err);
  });
+// Check if the 'supported' property is false
+
 
 
 //*** Testing with dummy data *****//    TO BE REMOVED
@@ -701,12 +730,15 @@ console.log(countries);
 function toggleViews() {
   const listButton = document.getElementById('showList');
   const mapButton = document.getElementById('showMap');
+  const listSectionID = document.getElementById('last24Table');
   const listSection = document.querySelector('.results-list');
   const mapSection = document.querySelector('.results-map');
+  
 
   listButton.addEventListener('click', function () {
     listButton.classList.add('active');
     mapButton.classList.remove('active');
+    listSectionID.classList.add('d-md-block');
     listSection.style.display = 'block';
     mapSection.style.height = '0';
   });
@@ -714,6 +746,7 @@ function toggleViews() {
   mapButton.addEventListener('click', function () {
     mapButton.classList.add('active');
     listButton.classList.remove('active');
+    listSectionID.classList.remove('d-md-block');
     mapSection.style.height = 'inherit';
     listSection.style.display = 'none';
   });
@@ -722,6 +755,21 @@ function toggleViews() {
 // Call the toggleViews function to enable the toggle functionality
 toggleViews();
 
+document.getElementById('showLast24').addEventListener('click', function() {
+  document.getElementById('last24Table').classList.remove('d-none');
+  document.getElementById('map-results-table').classList.remove('d-none');
+  document.getElementById('pastTable').classList.add('d-none');
+  this.classList.add('active');
+  document.getElementById('showPast').classList.remove('active');
+});
+
+document.getElementById('showPast').addEventListener('click', function() {
+  document.getElementById('pastTable').classList.remove('d-none');
+  document.getElementById('map-results-table').classList.add('d-none');
+  document.getElementById('last24Table').classList.add('d-none');
+  this.classList.add('active');
+  document.getElementById('showLast24').classList.remove('active');
+});
 
     </script>
 
