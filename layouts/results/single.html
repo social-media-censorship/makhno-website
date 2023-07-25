@@ -564,6 +564,14 @@ console.log(mapData);
       // For example, you can navigate to a specific country's page or show more details
       
     },
+    onRegionTipShow: function (event, label, code) {
+      // Check if the country has a non-empty status (not 'selected')
+      if (mapData[code] == 'selected' || mapData[code] == 'not_reachable' || mapData[code] == 'reachable' || mapData[code] == 'validation_not_possible' ) {
+        return true; // Allow showing tooltip
+      } else {
+        event.preventDefault(); // Prevent showing tooltip for empty status or 'selected'
+      }
+    },
     // Set the data for the map using the mapData object
     series: {
       regions: [{
@@ -612,17 +620,13 @@ console.log(mapData);
          return Promise.reject(response);
      }
  }).then(function(data) {
-     // This is the JSON from our response
-     createDynamicTables(data);
      if (data.subject.supported === false) {
-      // Run your code here
       console.log("The 'supported' property is false. Running something...");
       errorContentElement.classList.remove("d-none");
       contentElement.classList.add("d-none");
       errorIcon.innerHTML="<img src='../../img/svg/loop.svg'>"
       errorTitle.innerHTML="This URL is not supported"
       errorDesc.innerHTML="Try another URL or update your filter settings"
-      // You can replace the console.log statement with your desired code.
     } else if (data.subject.supported === true && data.subject.inserted === true ) {
       console.log("The 'supported' property is true. Url not scanned");
       errorContentElement.classList.remove("d-none");
@@ -631,11 +635,11 @@ console.log(mapData);
       errorTitle.innerHTML="Results not found"
       errorDesc.innerHTML="Refresh the page after few minutes for the results"
     }
+    createDynamicTables(data);
     if (data.last24.length >= 0) {
       populateWorldMap(data.last24, countries); // Use data.past if available
     } else {
-      console.log('No past data available for the world map.');
-     
+      console.log('No past data available for the world map.');     
     }
  }).catch(function(err) {
      // There was an error
@@ -751,7 +755,6 @@ function toggleViews() {
     listSection.style.display = 'none';
   });
 }
-
 // Call the toggleViews function to enable the toggle functionality
 toggleViews();
 
