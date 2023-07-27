@@ -66,7 +66,7 @@
                                 </thead>
                                 <tbody id="table-body-last24"></tbody>
                               </table>
-                              <div id="table-message-last24" class="background-coolgray-50 text-muted text-center my-5 py-5 fs-5"></div>
+                              <div id="table-message-last24" class="background-coolgray-50 text-muted text-center my-5 py-5 fs-5 d-none"></div>
                         </div>
                         <div class="results-map">
                             <!-- World Map -->
@@ -91,7 +91,7 @@
                         </thead>
                         <tbody id="table-body-past"></tbody>
                       </table>
-                      <div id="table-message-past" class="background-coolgray-50 text-muted text-center my-5 py-5 fs-5"></div>
+                      <div id="table-message-past" class="background-coolgray-50 text-muted text-center my-5 py-5 fs-5 d-none"></div>
                     </div>
                     
                 </section>
@@ -505,22 +505,22 @@ function createDynamicTables(data) {
     // Create the past table if it has data
     if (pastArray.length > 0) {
         createTable(pastArray, tableBodyPast, messagePast);
-        messagePast.classList.remove("d-block");
+        messagePast.classList.add("d-none");
         past_table.classList.remove("d-none");
     } else {
         past_table.classList.add("d-none");
-        messagePast.classList.add("d-block");
+        messagePast.classList.remove("d-none");
         messagePast.innerHTML = '<p class="mx-auto mb-0">This content doesn’t appear to be blocked in those countries.</p>';
     }
 
     // Create the last24 table if it has data
     if (last24Array.length > 0) {
         createTable(last24Array, tableBodyLast24, messageLast24);
-        messageLast24.classList.remove("d-block");
+        messageLast24.classList.add("d-none");
         last24_table.classList.remove("d-none");
     } else {
         last24_table.classList.add("d-none");
-        messageLast24.classList.add("d-block");
+        messageLast24.classList.remove("d-none");
         messageLast24.innerHTML = '<p class="mx-auto mb-0">This content doesn’t appear to be blocked in those countries.</p>';
     }
 }
