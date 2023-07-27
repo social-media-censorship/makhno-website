@@ -1,6 +1,10 @@
 <form action="/results" class="form-filter py-md-1">
   <div class="form-row d-flex flex-wrap">
-    <div class="form-group d-flex flex-column gap-1 px-md-3 pe-sm-3 my-3 col-md-12 col-sm-12 col-12">
+    <div class="form-group d-flex flex-column justify-content-end gap-1 px-md-3 ps-sm-3 my-3 col-md-6 col-sm-12 col-12">
+      <label for="url">URL:</label>
+      <input class="px-2" type="text" id="url" name="url" placeholder="Enter the social media content URL">
+    </div>
+    <div class="form-group d-flex flex-column gap-1 px-md-3 pe-sm-3 my-3 col-md-6 col-sm-12 col-12">
 
       <!--surround the select box with a "custom-select" DIV element-->
       <div class="custom-select">
@@ -262,10 +266,7 @@
         
       </div>
     </div>
-    <div class="form-group d-flex flex-column gap-1 px-md-3 ps-sm-3 my-3 col-md-12 col-sm-12 col-12">
-      <label for="url">URL:</label>
-      <input class="px-2" type="text" id="url" name="url" placeholder="Enter the social media content URL">
-    </div>
+   
     <div class="form-group d-flex flex-column justify-content-end my-3 px-md-3 mx-auto col-md-3 col-12">
       <input type="submit" value="Start Test">
     </div>
@@ -441,6 +442,7 @@ Array.from(customSelects).forEach(function (selectElement) {
 var searchInput = document.createElement("input");
 searchInput.setAttribute("class", "select-search");
 searchInput.setAttribute("type", "text");
+searchInput.setAttribute("id", "search");
 searchInput.setAttribute("placeholder", "Search countries...");
 searchInput.addEventListener("input", function (e) {
   var searchTerm = e.target.value;
@@ -474,8 +476,9 @@ var searchLabel = document.createElement("label");
 searchLabel.setAttribute("for", "country");
 searchLabel.textContent = "Countries:";
 
-var searchWrapper = document.createElement("div");
+var searchWrapper = document.createElement("label");
 searchWrapper.classList.add("label-search");
+searchWrapper.setAttribute("for", "search");
 searchWrapper.appendChild(searchLabel);
 searchWrapper.appendChild(searchInput);
 

@@ -39,8 +39,8 @@
                             </div>
                         </dialog>
                     
-                        <button id="openModalDialog">{{ partial "fontawesome.html" "duotone/play" }}</button>
-                    
+                        <button id="openModalDialog" type="button" title="Open the modal dialog" aria-labelledby="labelId" style="font-size: 0px;">{{ partial "fontawesome.html" "duotone/play" }}Open Dialog</button>
+                        <span id="labelId" style="font-size: 0px;">Open the modal dialog to choose options</span>
                         <script>
                              var ModalVideo = document.getElementById('ModalVideo');
                                 var video = document.querySelector('.responsive-video');

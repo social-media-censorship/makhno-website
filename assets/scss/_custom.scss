@@ -321,7 +321,7 @@ h1 {
         font-size: 1rem;
         font-weight: 500;
         line-height: 1.5;
-        color: $teal-600;
+        color: $teal-700;
         text-decoration: none;
         & .inline-svg {
           width: 0.8rem;
@@ -387,7 +387,7 @@ h1 {
 
 // Top Bar
 #top-bar {
-  background-color: $teal-600;
+  background-color: $teal-700;
   color: #333;
   display: flex;
   align-items: flex-start;
@@ -409,6 +409,7 @@ h1 {
   font-weight: 700;
   padding-left: 1.5rem;
   text-decoration: underline;
+  text-underline-offset: 3px;
   svg {
     width: 1rem;
   }
@@ -425,10 +426,11 @@ h1 {
 }
 
 #close-btn {
+  font-size: 0px;
   border: none;
   background-color: transparent;
   color: #fff;
-  font-size: 1.25rem;
+
   cursor: pointer;
   margin-left: auto; /* align to right */
 }
@@ -528,131 +530,122 @@ footer {
       color: $coolgray-500;
     }
   }
-    
-    
-  
-    
-  
-    /*the container must be positioned relative:*/
-    .custom-select {
-      position: relative;
-        select {
-          display: none; /*hide original SELECT element:*/
-        } 
-        .select-selected {
-          background-color: $white;
-          color: $coolgray-500;
-          padding: 0.625rem 5rem 0.625rem 0.625rem;        
-          cursor: pointer;
-          user-select: none;
-          border: 1px solid #d1d5db;
-          box-shadow: 0px 1px 2px rgba(0,0,0,0.05);
-          border-radius: 0.375rem;
-          /*style the arrow inside the select element:*/
-          &:after {
-            position: absolute;
-            content: "";
-            top: calc(50% - 3px);
-            right: 10px;
-            width: 0;
-            height: 0;
-            border: 6px solid transparent;
-            border-color: $teal-900 transparent transparent transparent;
-          }
-          /*point the arrow upwards when the select box is open (active):*/
-          &.select-arrow-active{
-            border-radius: 0.375rem 0.375rem 0 0;
-            border: 2px solid $teal-700;
-            border-bottom:1px solid $coolgray-300;
-            &:after {
-              border-color: transparent transparent $teal-900 transparent;
-              top: calc(50% - 9px);
-            }
-          }
-          
-        }
-       /* Add this CSS to achieve a 4-column layout */
-       .select-items {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 0 10px;
-        position: absolute;
-        background-color: $white;
-        top: 100%;
-        left: 0;
-        right: 0;
-        z-index: 99;
-        height: 220px;
 
-        overflow-y: auto;
-        border: 2px solid transparent;
-        border-color: transparent $teal-700 $teal-700 $teal-700;
-        transition: all 1.5s ease-in-out;
-        @include media-breakpoint-down (sm){
-          grid-template-columns: repeat(1, 1fr);
-        }
-        @include media-breakpoint-between(md, xl){
-          grid-template-columns: repeat(3, 1fr);
-        }
-        div {
-          width: auto;
-          padding: 8px;
-          text-align: center;
-          color: $coolgray-900;
-          padding: 8px 16px;
-          border: 1px solid transparent;
-          border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
-          cursor: pointer;
-          user-select: none;
-          max-height: 3.875rem;
-          &:hover{
-            background-color: $teal-50;
-          }
-          &.same-as-selected{
-            background-color: $teal-100;
-          }
-        }
-        &.four-columns {
-          column-count: 4;
-          column-gap: 10px;
-          max-height: none; /* Remove the maximum height to display all items */
-        }
-        &.select-hide {
-           display: none;
-        }
-    
-      }
-      span.clear-selected{
-        position: absolute;
-        right: 3.5rem;
-        top: .625rem;  
-        background: $coolgray-200;
-        line-height: 1;
-        padding: .375rem;
-        border-radius: 50%;
-        cursor: pointer;
-      }
-     
+  /*the container must be positioned relative:*/
+  .custom-select {
+    position: relative;
+    select {
+      display: none; /*hide original SELECT element:*/
     }
-  
+    .select-selected {
+      background-color: $white;
+      color: $coolgray-500;
+      padding: 0.625rem 5rem 0.625rem 0.625rem;
+      cursor: pointer;
+      user-select: none;
+      border: 1px solid #d1d5db;
+      box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05);
+      border-radius: 0.375rem;
+      /*style the arrow inside the select element:*/
+      &:after {
+        position: absolute;
+        content: "";
+        top: calc(50% - 3px);
+        right: 10px;
+        width: 0;
+        height: 0;
+        border: 6px solid transparent;
+        border-color: $teal-900 transparent transparent transparent;
+      }
+      /*point the arrow upwards when the select box is open (active):*/
+      &.select-arrow-active {
+        border-radius: 0.375rem 0.375rem 0 0;
+        border: 2px solid $teal-700;
+        border-bottom: 1px solid $coolgray-300;
+        &:after {
+          border-color: transparent transparent $teal-900 transparent;
+          top: calc(50% - 9px);
+        }
+      }
+    }
+    /* Add this CSS to achieve a 4-column layout */
+    .select-items {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0 10px;
+      position: absolute;
+      background-color: $white;
+      top: 100%;
+      left: 0;
+      right: 0;
+      z-index: 99;
+      height: 220px;
+
+      overflow-y: auto;
+      border: 2px solid transparent;
+      order-color: transparent $teal-700 $teal-700 $teal-700;
+      transition: all 1.5s ease-in-out;
+      @include media-breakpoint-down(sm) {
+        grid-template-columns: repeat(1, 1fr);
+      }
+      @include media-breakpoint-between(md, xl) {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      div {
+        width: auto;
+        padding: 8px;
+        text-align: center;
+        color: $coolgray-900;
+        padding: 8px 16px;
+        border: 1px solid transparent;
+        border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+        cursor: pointer;
+        user-select: none;
+        max-height: 3.875rem;
+        &:hover {
+          background-color: $teal-50;
+        }
+        &.same-as-selected {
+          background-color: $teal-100;
+        }
+      }
+      &.four-columns {
+        column-count: 4;
+        column-gap: 10px;
+        max-height: none; /* Remove the maximum height to display all items */
+      }
+      &.select-hide {
+        display: none;
+      }
+    }
+    span.clear-selected {
+      position: absolute;
+      right: 3.5rem;
+      top: 0.625rem;
+      background: $coolgray-200;
+      line-height: 1;
+      padding: 0.375rem;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+  }
 }
-.label-search{
+.label-search {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
 }
 input.select-search {
   padding-left: 0.375rem;
-  border-radius: 0!important;
+  border-radius: 0 !important;
   max-height: 2.875rem;
-
 }
 
 input.select-search:focus {
-  outline-color: #ffffff!important;
-  border-radius: 0!important;
+  outline-color: #ffffff !important;
+  border-radius: 0 !important;
   -moz-outline-radius: 0.675rem;
-  outline-width: 1px!important;
+  outline-width: 1px !important;
   outline-style: solid;
 }
 
@@ -662,13 +655,13 @@ input[type="text"] {
   box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05);
   border-radius: 0.375rem;
   padding-block: 0.625rem;
-  
-  &:focus{
-    outline-color:$teal-700  !important;
+
+  &:focus {
+    outline-color: $teal-700 !important;
     border-radius: 0.375rem;
-    -moz-outline-radius:0.675rem;
+    -moz-outline-radius: 0.675rem;
     outline-width: 2px;
-    outline-style: solid;  
+    outline-style: solid;
   }
 }
 
@@ -690,7 +683,6 @@ select#country {
   box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05);
   border-radius: 0.375rem;
   padding-block: 0.625rem;
-  
 }
 
 input[type="submit"] {
@@ -703,7 +695,6 @@ input[type="submit"] {
   color: #78350f;
 }
 
-
 .inline-svg {
   display: inline-flex;
   justify-content: center;
@@ -715,22 +706,23 @@ input[type="submit"] {
 
 #top-bar .inline-svg {
   display: flex;
+  font-size: 1rem;
 }
 
 #red-x .inline-svg {
   height: 1.25em;
   width: 1.25em;
   top: 0;
-  border-radius: .5rem;
-  color: #B91C1C;
+  border-radius: 0.5rem;
+  color: #b91c1c;
 }
 
-#green-results .inline-svg {
+.green-results .inline-svg {
   height: 1.25em;
   width: 1.25em;
   top: 0;
-  border-radius: .5rem;
-  padding: .5rem;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
   background-color: $teal-200;
   color: $teal-800;
 }
@@ -775,9 +767,9 @@ dialog {
 // Results page
 .test-results {
   font-size: 1.25rem;
-  text-transform:uppercase;
+  text-transform: uppercase;
   color: $coolgray-900;
-  font-weight:600;
+  font-weight: 600;
   line-height: 3.75rem;
   letter-spacing: -0.03125rem;
 }
@@ -788,7 +780,7 @@ dialog {
   font-weight: 500;
   text-decoration: underline;
   letter-spacing: -0.025em;
-  @include media-breakpoint-down (md){
+  @include media-breakpoint-down(md) {
     font-size: 1rem;
   }
 }
@@ -804,80 +796,87 @@ dialog {
 }
 
 section#map-results-table,
-section#past-results-table{
-
-  hr{
+section#past-results-table {
+  hr {
     width: calc(100% - 1.5rem);
     color: $coolgray-400;
-    @include media-breakpoint-down (sm){
+    @include media-breakpoint-down(sm) {
       visibility: hidden;
     }
   }
 }
-
-.past-results,
-.last24-results{
-  border-radius: 0.5rem;
-  border: 1px solid $coolgray-200;
-  background: $white;
-  width: 100%;
-  /* /shadow/base */
-  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.06), 0px 1px 3px 0px rgba(0, 0, 0, 0.10);
-  thead{
-    background-color: $coolgray-50;
-    border-bottom: 0.0625rem solid $coolgray-200;
-
-    th{
-      padding: 0.75rem 1.5rem;
+.results-list {
+  div {
+    border-radius: 0.375rem;
+    p {
       color: $coolgray-500;
-      font-size: 0.75rem;
+      text-align: center;
+      font-size: 1.5rem;
       font-style: normal;
-      font-weight: 500;
-      line-height: 1rem;
-      letter-spacing: 0.0375rem;
+      font-weight: 400;
+      line-height: 120%; /* 1.8rem */
+      max-width: 27.3125rem;
     }
   }
-  tbody{
-    tr{
+
+  .past-results,
+  .last24-results {
+    border-radius: 0.5rem;
+    border: 1px solid $coolgray-200;
+    background: $white;
+    width: 100%;
+    /* /shadow/base */
+    box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.06),
+      0px 1px 3px 0px rgba(0, 0, 0, 0.1);
+    thead {
+      background-color: $coolgray-50;
       border-bottom: 0.0625rem solid $coolgray-200;
-      td{
+
+      th {
         padding: 0.75rem 1.5rem;
         color: $coolgray-500;
-        font-size: 0.875rem;
+        font-size: 0.75rem;
         font-style: normal;
         font-weight: 500;
-        line-height: 1.25rem; /* 142.857% */
-        &::first-letter{
-          text-transform: capitalize;
-        }
-          span{
+        line-height: 1rem;
+        letter-spacing: 0.0375rem;
+      }
+    }
+    tbody {
+      tr {
+        border-bottom: 0.0625rem solid $coolgray-200;
+        td {
+          padding: 0.75rem 1.5rem;
+          color: $coolgray-500;
+          font-size: 0.875rem;
+          font-style: normal;
+          font-weight: 500;
+          line-height: 1.25rem; /* 142.857% */
+          &::first-letter {
+            text-transform: capitalize;
+          }
+          span {
             padding: 0rem 0.5rem;
-            border-radius: 2.25rem;            
-            
-            &.not_reachable{
-              background: var(--red-100, #FEE2E2);
-              color: var(--red-900, #7F1D1D);
+            border-radius: 2.25rem;
+
+            &.not_reachable {
+              background: var(--red-100, #fee2e2);
+              color: var(--red-900, #7f1d1d);
             }
-            &.validation_not_possible{
-              background: var(--yellow-100, #FEF3C7);
-              color: var(--yellow-900, #78350F);
+            &.validation_not_possible {
+              background: var(--yellow-100, #fef3c7);
+              color: var(--yellow-900, #78350f);
             }
-            &.reachable{
-              background: var(--green-100, #D1FAE5);
-              color: var(--green-900, #064E3B);
+            &.reachable {
+              background: var(--green-100, #d1fae5);
+              color: var(--green-900, #064e3b);
             }
-            
+          }
         }
       }
     }
-    
   }
-
 }
-
-
-
-
 
 /* Add CSS to hide the map section by default */
 .results-map {
@@ -890,17 +889,18 @@ section#past-results-table{
 .toggle-switch {
   display: flex;
   justify-content: end;
-  button{
-    color:$coolgray-500;
+  gap: 1rem;
+  button {
+    color: $coolgray-500;
     cursor: pointer;
     font-size: 0.875rem;
     font-weight: 500;
     line-height: 1.25rem;
-    border:none;
+    border: none;
     background: transparent;
     padding: 0.5rem 0.75rem;
     border-radius: 0.375rem;
-    &.active{
+    &.active {
       background-color: $teal-100;
       color: $teal-700;
     }
@@ -909,25 +909,24 @@ section#past-results-table{
 
 /* Hide the map on mobile */
 @media screen and (max-width: 767px) {
-  #world-map,.toggle-switch,h3#red-x{
-    display: none!important;
+  #world-map,
+  .toggle-switch,
+  h3#red-x {
+    display: none !important;
   }
 }
-
-
 
 .selected {
   fill: blue; /* Replace 'blue' with the desired color for selected countries */
 }
 
-.error-section{
+.error-section {
   background-image: url(../../img/earth.png);
   min-height: 60vh;
   background-size: 100% 100%;
   background-repeat: no-repeat;
   background-position: center;
-  & 
-  .icon{ 
+  & .icon {
     img {
       max-width: 200px;
     }
@@ -937,30 +936,29 @@ section#past-results-table{
     font-size: 2.25rem;
     font-weight: 700;
     line-height: 3.75rem;
-    @include media-breakpoint-down (md){
+    @include media-breakpoint-down(md) {
       font-size: 1.25rem;
-    } 
+    }
   }
-  .description{
+  .description {
     color: $coolgray-900;
     font-size: 1.5rem;
     font-weight: 500;
-    line-height: 3.75rem; 
-    @include media-breakpoint-down (md) {
+    line-height: 3.75rem;
+    @include media-breakpoint-down(md) {
       font-size: 1rem;
       line-height: 1.2;
     }
   }
-  @include media-breakpoint-down (md) {
+  @include media-breakpoint-down(md) {
     min-height: 40vh;
   }
 }
 
-.toggle-switch-mobile
-{
+.toggle-switch-mobile {
   background-color: $coolgray-100;
   padding: 0.125rem;
-  border-radius: .5rem;
+  border-radius: 0.5rem;
 
   button {
     padding: 0.5625rem 1.5625rem;
@@ -971,28 +969,26 @@ section#past-results-table{
     font-weight: 500;
     line-height: 1.25rem;
     background: transparent;
-    &.active{
+    &.active {
       border-radius: 0.375rem;
-      border: 1px solid var(--gray-200, #E5E7EB);
-      background: var(--white, #FFF);
+      border: 1px solid var(--gray-200, #e5e7eb);
+      background: var(--white, #fff);
 
       /* shadow/sm */
       box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.05);
     }
   }
-} 
-
+}
 
 .jvectormap-tip {
-  background: #ffffff!important;
-  color: black!important;
+  background: #ffffff !important;
+  color: black !important;
   font-size: 1.25rem;
   padding: 5px;
-  filter: drop-shadow(0px 3.009795665740967px 15.427142143249512px rgba(20, 0, 66, 0.02)) drop-shadow(0px 6.83848762512207px 27.929677963256836px rgba(20, 0, 66, 0.03)) drop-shadow(0px 11.902084350585938px 36.94927215576172px rgba(20, 0, 66, 0.03)) drop-shadow(0px 18.907543182373047px 41.85419845581055px rgba(20, 0, 66, 0.04)) drop-shadow(0px 29.172935485839844px 42.28558349609375px rgba(20, 0, 66, 0.04)) drop-shadow(0px 45.52207946777344px 40.19178771972656px rgba(20, 0, 66, 0.04)) drop-shadow(0px 75.57373046875px 49.097740173339844px rgba(20, 0, 66, 0.05)) drop-shadow(0px 151px 98px rgba(20, 0, 66, 0.07));
 }
 .jvectormap-legend {
-  background: white!important;
-  color: black!important;
+  background: white !important;
+  color: black !important;
   border-radius: 3px;
   border: 1px solid;
 }

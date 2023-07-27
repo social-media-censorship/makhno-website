@@ -1,0 +1,150 @@
+<form action="/results" class="form-filter py-md-1">
+  <div class="form-row d-flex flex-wrap">
+    
+    <div class="form-group d-flex flex-column gap-1 px-md-3 pe-sm-3 my-3 col-md-6 col-sm-12 col-12">
+      <label for="country">Countries:</label>
+      <div class="custom-select">
+        <input type="text" class="select-search" placeholder="Search countries...">
+        <ul class="select-items">
+          <li data-value="AF">Afghanistan</li>
+          <li data-value="AX">Aland Islands</li>
+          <li data-value="AL">Albania</li>
+          <li data-value="DZ">Algeria</li>
+          <li data-value="AS">American Samoa</li>
+        </ul>
+      </div>
+    </div>
+   
+    <div class="form-group d-flex flex-column justify-content-end my-3 px-md-3 mx-auto col-md-3 col-12">
+      <input type="submit" value="Start Test">
+    </div>
+  </div>
+</form>
+<style>
+  .custom-select {
+  position: relative;
+}
+
+.select-items {
+  position: absolute;
+  display: none;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  max-height: 200px;
+  overflow-y: auto;
+  background-color: #fff;
+}
+
+.select-items li {
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.select-items li:hover {
+  background-color: #f1f1f1;
+}
+
+.select-arrow-active {
+  transform: rotate(180deg);
+}
+
+</style>
+
+<script>
+
+// Function to handle option click
+function handleOptionClick(e) {
+  e.stopPropagation();
+  const optionValue = this.getAttribute("data-value");
+  const select = this.closest(".custom-select").querySelector("select");
+  const option = select.querySelector(`option[value="${optionValue}"]`);
+  option.selected = !option.selected;
+  this.classList.toggle("same-as-selected");
+  updateSelectHeader(select);
+}
+
+// Function to update the custom select's header with selected options
+function updateSelectHeader(select) {
+  const selectedOptions = Array.from(select.options).filter(option => option.selected);
+  const selectHeader = select.closest(".custom-select").querySelector(".select-search");
+  selectHeader.value = selectedOptions.length > 0 ? selectedOptions.map(option => option.text).join(", ") : "";
+}
+
+// Function to filter options based on search term
+function filterOptions(searchTerm, selectItems) {
+  const options = selectItems.querySelectorAll("li");
+  const searchValue = searchTerm.toLowerCase();
+
+  Array.from(options).forEach(option => {
+    const text = option.innerHTML.toLowerCase();
+    option.style.display = text.indexOf(searchValue) > -1 ? "" : "none";
+  });
+}
+
+// Event listener for opening/closing select dropdown
+function toggleSelectDropdown(e) {
+  e.stopPropagation();
+  const selectItems = this.parentNode.querySelector(".select-items");
+  closeAllSelect(selectItems);
+  selectItems.classList.toggle("select-hide");
+  this.classList.toggle("select-arrow-active");
+}
+
+// Event listener for document click
+function handleDocumentClick(e) {
+  const target = e.target;
+  if (!target.classList.contains("select-search")) {
+    closeAllSelect(null);
+  }
+}
+
+// Function to close all select dropdowns except the specified element
+function closeAllSelect(exceptElement) {
+  Array.from(document.querySelectorAll(".select-items")).forEach(selectItems => {
+    if (selectItems !== exceptElement) {
+      selectItems.classList.add("select-hide");
+    }
+  });
+
+  Array.from(document.querySelectorAll(".select-arrow-active")).forEach(selectHeader => {
+    if (selectHeader !== exceptElement && selectHeader.parentNode.querySelector(".select-items").classList.contains("select-hide")) {
+      selectHeader.classList.remove("select-arrow-active");
+    }
+  });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  // Event listener for opening all select dropdowns
+  document.querySelector(".select-search").addEventListener("click", function () {
+    const selectItems = this.parentNode.querySelector(".select-items");
+    selectItems.classList.remove("select-hide");
+  });
+
+  // Event listener for checking if search input has a value
+  document.querySelector(".select-search").addEventListener("input", function () {
+    const searchTerm = this.value;
+    if (searchTerm.length > 0) {
+      const selectItems = this.parentNode.querySelector(".select-items");
+      selectItems.classList.remove("select-hide");
+    }
+    filterOptions(searchTerm, this.parentNode.querySelector(".select-items"));
+  });
+
+  // Event listener for document click
+  document.addEventListener("click", handleDocumentClick);
+
+  // Event listener for option click
+  Array.from(document.querySelectorAll(".select-items li")).forEach(option => {
+    option.addEventListener("click", handleOptionClick);
+  });
+
+  // Event listener for opening/closing select dropdown
+  document.querySelectorAll(".select-search, .select-arrow").forEach(selectHeader => {
+    selectHeader.addEventListener("click", toggleSelectDropdown);
+  });
+});
+
+</script>

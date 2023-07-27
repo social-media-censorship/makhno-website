@@ -1,6 +1,7 @@
 <div id="top-bar">
     <p class="text-sm-center text-start">We added support for TikTok! <a href="/announcement/">Read the Announcement<span class=" d-inline-block align-middle ps-1">{{ partial "fontawesome.html" "regular/arrow-right-long" }}</span></a></p>
-    <button id="close-btn" class="p-0" onclick="closeTopBar()">{{ partial "fontawesome.html" "regular/xmark" }}</button>
+    <button id="close-btn" class="p-0" type="button" onclick="closeTopBar()" title="Close the top bar" aria-labelledby="closeLabel"  >{{ partial "fontawesome.html" "regular/xmark" }}Close</button>
+    <span id="closeLabel" style="font-size: 0px;">Close the top bar</span>
 </div>
 
 <script>
