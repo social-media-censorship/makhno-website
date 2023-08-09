@@ -568,10 +568,10 @@ footer {
         }
       }
     }
-    /* Add this CSS to achieve a 4-column layout */
+    /* Add this CSS to achieve a 1-column layout */
     .select-items {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(1, 1fr);
       gap: 0 10px;
       position: absolute;
       background-color: $white;
@@ -594,7 +594,6 @@ footer {
       div {
         width: auto;
         padding: 8px;
-        text-align: center;
         color: $coolgray-900;
         padding: 8px 16px;
         border: 1px solid transparent;
@@ -606,7 +605,10 @@ footer {
           background-color: $teal-50;
         }
         &.same-as-selected {
-          background-color: $teal-100;
+          background: url("img/svg/checkmark.svg"), $teal-50;
+          background-size: 1.25rem;
+          background-repeat: no-repeat;
+          background-position: right 1rem center;
         }
       }
       &.four-columns {
@@ -620,7 +622,7 @@ footer {
     }
     span.clear-selected {
       position: absolute;
-      right: 3.5rem;
+      right: 2rem;
       top: 0.625rem;
       background: $coolgray-200;
       line-height: 1;
@@ -986,9 +988,11 @@ section#past-results-table {
   font-size: 1.25rem;
   padding: 5px;
 }
+
 .jvectormap-legend {
   background: white !important;
   color: black !important;
-  border-radius: 3px;
-  border: 1px solid;
+  border-radius: 4px;
+  border: 1px solid $coolgray-400;
+  padding: .75rem 1rem !important;
 }
